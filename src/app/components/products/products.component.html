@@ -1,0 +1,95 @@
+<div style="display: flex;">
+    <h1>Products</h1>
+</div>
+
+<div class="insights" style="display: flex;">
+    <table class="table table-striped" style="margin-top: 70px;">
+        <thead>
+            <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Code</th>
+                <th scope="col">Product Description</th>
+                <th scope="col">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(product of products; track product){
+              <tr>
+                <td>
+                  <span *ngIf="!product.isEditing">{{ product.productName }}</span>
+                  <input *ngIf="product.isEditing" [(ngModel)]="product.productName" class="form-control"/>
+                </td>
+                <td>
+                  <span *ngIf="!product.isEditing">{{ product.productCode }}</span>
+                  <input *ngIf="product.isEditing" [(ngModel)]="product.productCode" class="form-control"/>
+                </td>
+                <td>
+                  <span *ngIf="!product.isEditing">{{ product.productDescription }}</span>
+                  <input *ngIf="product.isEditing" [(ngModel)]="product.productDescription" class="form-control"/>
+                </td>
+                <td>
+                  <button class="btn btn-success mr-2" (click)="toggleEditMode(product)">
+                    <i *ngIf="!product.isEditing" class="fa-solid fa-edit"></i>
+                    <i *ngIf="product.isEditing" class="fa-solid fa-save" (click)="updateProduct(product)"></i>
+                  </button>
+                  <button *ngIf="product.isEditing" class="btn btn-secondary" (click)="toggleEditMode(product)">
+                    <i class="fa-solid fa-times"></i>
+                  </button>
+                  <button *ngIf="!product.isEditing" class="btn btn-danger" (click)="deleteProductById(product.id!)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+    </table>
+</div>
+
+<div class="insights">
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            inventory_2
+        </span>
+        <h2 class="mt-2">Add Product</h2>
+        <div class="right">
+            
+                <div class="input-box">
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="productName">Product Name</label>
+                            <p *ngIf="!prodcutModel.productName" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="prodcutModel.productName!" validate type="text" name="productName"
+                            class="form-control" id="productName" required autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="productCode">Product Code</label>
+                            <p *ngIf="!prodcutModel.productCode" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="prodcutModel.productCode!" validate type="text" name="productCode"
+                            class="form-control" id="productCode" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="userName">Product Description</label>
+                            <p *ngIf="!prodcutModel.productDescription" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <textarea [(ngModel)]="prodcutModel.productDescription" validate type="text" name="productDescription"
+                            class="form-control" id="productDescription" autocomplete="off" rows="7"></textarea>
+                    </div>
+                </div>
+                <div class="input-field">
+                    <div class="btns">
+                        <button (click)="createProduct()" [disabled]="" class="submit">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

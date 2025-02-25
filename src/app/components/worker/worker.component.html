@@ -1,0 +1,137 @@
+<div style="display: flex;">
+    <h1>Yazar Detayı</h1>
+</div>
+
+<div class="insights">
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            person
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <!-- <h2>Information</h2> -->
+
+                <div style="display: flex; justify-content: center;" class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                    </div>
+                    <!-- <img style="width: 174px;" src="https://localhost:7268/ProfilePictures/{{userModel.profilePicture}}" alt=""> -->
+                    <img style="width: 174px;" src="{{imageUrl}}ProfilePictures/{{workerModel.profilePicture}}" alt="">
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="firstName">First Name</label>
+                    </div>
+                    <input [(ngModel)]="workerModel.firstName!" validate type="text" name="firstName"
+                        class="form-control" id="firstName" readonly autocomplete="off">
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="lastName">Last Name</label>
+                    </div>
+                    <input [(ngModel)]="workerModel.lastName!" validate type="text" name="lastName" class="form-control"
+                        id="lastName" readonly autocomplete="off">
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="userName">User Name</label>
+                    </div>
+                    <input [(ngModel)]="workerModel.userName" validate type="text" name="userName" class="form-control"
+                        id="userName" readonly autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            person
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="lastName">Date Of Birth</label>
+                    </div>
+                    <label type="text" name="dateOfBirth" class="form-control" id="dateOfBirth" readonly
+                        autocomplete="off">{{workerModel.dateOfBirth | date: 'dd/MM/yyyy'}}</label>
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="userName">Gender</label>
+                    </div>
+                    <label type="text" name="gender" class="form-control" id="gender" readonly
+                        autocomplete="off"></label>
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="userName">Role</label>
+                    </div>
+                    <input [(ngModel)]="workerModel.role.name" validate type="text" name="role" class="form-control"
+                        id="role" readonly autocomplete="off">
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="userName">Created Date</label>
+                    </div>
+                    <label type="text" name="role" class="form-control" id="role" readonly
+                        autocomplete="off">{{workerModel.createdDate | date: 'dd/MM/yyyy - hh:mm'}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-field">
+        <div class="btns">
+            <button [disabled]="" class="submit">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save
+            </button>
+        </div>
+    </div>
+
+
+    <!-- <div class="sales item1">
+        <span class="material-symbols-outlined icons">
+            person
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <h2>Blog yazıları</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Başlık</th>
+                            <th scope="col"><i class="fa-solid fa-eye"></i></th>
+                            <th scope="col"><i class="fa-solid fa-thumbs-up"></i></th>
+                            <th scope="col"><i class="fa-solid fa-comment"></i></th>
+                            <th scope="col"><i class="fa-solid fa-gears"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(blog of blogs; track blog){
+                        <tr>
+                            <td>{{blog.title}}</td>
+                            <td>{{blog.viewCount}}</td>
+                            <td>{{blog.likeCount}}</td>
+                            <td>{{blog.commentCount}}</td>
+                            <td>
+                                <a routerLink="/blog-detail/{{blog.id}}"><button class="btn btn-success mr-2"><i
+                                            class="fa-solid fa-eye"></i></button></a>
+                                <button class="btn btn-danger"
+                                    (click)="deleteBlogById(blog.id!, workerModel.id!, blog.title)"><i
+                                        class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> -->
+</div>

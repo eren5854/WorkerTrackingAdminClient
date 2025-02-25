@@ -1,0 +1,160 @@
+<div style="display: flex;">
+    <h1>Machines</h1>
+    <span (click)="addCard()" style="font-size: 34px; color: green; cursor: pointer;"
+        class="material-symbols-outlined ms-3">
+        add_circle
+    </span>
+</div>
+
+<div class="insights">
+
+    <div *ngIf="addCardDiv" class="sales">
+        <span class="material-symbols-outlined icons">
+            groups
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <form #createMachineForm="ngForm" (ngSubmit)="createMachine(createMachineForm)">
+                    <div class="input-field mb-2">
+                        <label for="departmentName">Machine Name</label>
+                        <input [(ngModel)]="machineModel.machineName" validate type="text" name="departmentName" class="form-control"
+                            id="departmentName" required autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="machineBrand">Machine Brand</label>
+                        <input [(ngModel)]="machineModel.machineBrand" validate type="text" name="machineBrand" class="form-control"
+                            id="machineBrand" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="machineModel">Machine Model</label>
+                        <input [(ngModel)]="machineModel.machineModel" validate type="text" name="machineModel" class="form-control"
+                            id="machineModel" required autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="machineSerialNumber">Machine Serial Number</label>
+                        <input [(ngModel)]="machineModel.machineSerialNumber" validate type="text" name="machineSerialNumber" class="form-control"
+                            id="machineSerialNumber" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="machineType">Machine Type</label>
+                        <input [(ngModel)]="machineModel.machineType" validate type="text" name="machineType" class="form-control"
+                            id="machineType" required autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="machineLocation">Machine Location</label>
+                        <textarea [(ngModel)]="machineModel.machineLocation" validate type="text" name="machineLocation" class="form-control"
+                            id="machineLocation" autocomplete="off"></textarea>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="machineNumber">Machine Number</label>
+                        <input [(ngModel)]="machineModel.machineNumber" validate type="number" name="machineNumber" class="form-control"
+                            id="machineNumber" required autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <label for="machineDescription">Machine Description</label>
+                        <textarea [(ngModel)]="machineModel.machineDescription" validate type="text" name="machineDescription" class="form-control"
+                            id="machineDescription" autocomplete="off"></textarea>
+                    </div>
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk "></i>
+                                <!-- Save -->
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @for (machine of machines; track machine) {
+
+        <div class="sales">
+            <span class="material-symbols-outlined icons">
+                precision_manufacturing
+                </span>
+            <div class="right">
+                <div class="input-box">
+                    <!-- <h2>Department</h2> -->
+                    <form #updateMachineForm="ngForm" (ngSubmit)="updateMachine(updateMachineForm, machine)">
+                        <div class="input-field mb-2">
+                            <label for="departmentName">Machine Name</label>
+                            <input [(ngModel)]="machine.machineName" validate type="text" name="departmentName" class="form-control"
+                                id="departmentName" required autocomplete="off">
+                        </div>
+    
+                        <div class="input-field mb-2">
+                            <label for="machineBrand">Machine Brand</label>
+                            <input [(ngModel)]="machine.machineBrand" validate type="text" name="machineBrand" class="form-control"
+                                id="machineBrand" autocomplete="off">
+                        </div>
+    
+                        <div class="input-field mb-2">
+                            <label for="machineModel">Machine Model</label>
+                            <input [(ngModel)]="machine.machineModel" validate type="text" name="machineModel" class="form-control"
+                                id="machineModel" required autocomplete="off">
+                        </div>
+    
+                        <div class="input-field mb-2">
+                            <label for="machineSerialNumber">Machine Serial Number</label>
+                            <input [(ngModel)]="machine.machineSerialNumber" validate type="text" name="machineSerialNumber" class="form-control"
+                                id="machineSerialNumber" autocomplete="off">
+                        </div>
+    
+                        <div class="input-field mb-2">
+                            <label for="machineType">Machine Type</label>
+                            <input [(ngModel)]="machine.machineType" validate type="text" name="machineType" class="form-control"
+                                id="machineType" required autocomplete="off">
+                        </div>
+    
+                        <div class="input-field mb-2">
+                            <label for="machineLocation">Machine Location</label>
+                            <textarea [(ngModel)]="machine.machineLocation" validate type="text" name="machineLocation" class="form-control"
+                                id="machineLocation" autocomplete="off"></textarea>
+                        </div>
+    
+                        <div class="input-field mb-2">
+                            <label for="machineNumber">Machine Number</label>
+                            <input [(ngModel)]="machine.machineNumber" validate type="number" name="machineNumber" class="form-control"
+                                id="machineNumber" required autocomplete="off">
+                        </div>
+    
+                        <div class="input-field mb-2">
+                            <label for="machineDescription">Machine Description</label>
+                            <textarea [(ngModel)]="machine.machineDescription" validate type="text" name="machineDescription" class="form-control"
+                                id="machineDescription" autocomplete="off" rows="7"></textarea>
+                        </div>
+    
+                        <div class="input-field">
+                            <div class="btns">
+                                <button [disabled]="" class="submit">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    Save
+                                </button>
+
+                                <button type="button" (click)="deleteMachineById(machine.id!)" class="btn btn-danger mr-3">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+
+                                <button  type="button" (click)="updateMachineIsActive(machine.id!)" class="btn btn-primary">
+                                    <i *ngIf="machine.isActive" style="font-size: 18px;" class="fa-solid fa-square-check"></i>
+                                    <i *ngIf="!machine.isActive" style="font-size: 18px;" class="fa-solid fa-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>
