@@ -1,38 +1,32 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SwalService } from '../../services/swal.service';
-import { UserModel } from '../../models/user.model';
+import { DepartmentModel } from '../../models/department.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { DepartmentModel } from '../../models/department.model';
-import { WorkerProductionModel } from '../../models/worker-production.model';
+import { DepartmentProductionModel } from '../../models/department-production.model';
 import { ProductModel } from '../../models/product.model';
 
 @Component({
-  selector: 'app-worker',
+  selector: 'app-department',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './worker.component.html',
-  styleUrl: './worker.component.css'
+  templateUrl: './department.component.html',
+  styleUrl: './department.component.css'
 })
-export class WorkerComponent {
-  workerModel: UserModel = new UserModel();
-  departments: DepartmentModel[] = [];
-  workerProductions: WorkerProductionModel[] = [];
-  workerProductionModel: WorkerProductionModel = new WorkerProductionModel();
-  products: ProductModel[] = [];
+export class DepartmentComponent {
   id: string = "";
-  imageUrl?: string;
+  departmentModel: DepartmentModel = new DepartmentModel();
+  departmentProductionModel: DepartmentProductionModel = new DepartmentProductionModel();
+  departmentProductions: DepartmentProductionModel[] = [];
+  products: ProductModel[] = [];
 
-  @ViewChild('fileInput') fileInput!: ElementRef;
-  selectedImageUrl: string | null = null;
-
-  selectedOption: string = 'Select Department...';
+  selectedOption: string = 'Select Product...'; // Varsayılan olarak seçilen öğe
   isDropdownOpen: boolean = false;
 
-  selectedDepartmentId: string | null = null;
   selectedProductId: string | null = null;
+
   constructor(
     private http: HttpService,
     private activated: ActivatedRoute,
@@ -45,33 +39,9 @@ export class WorkerComponent {
       this.id = res.id;
       console.log(res.id);
     });
-    this.imageUrl = this.http.getImageUrl();
-    this.getWorkerById(this.id!);
-    this.getAllDepartments();
-    this.getAllWorkerProductionsByUserId(this.id);
+    this.getDepartmentById(this.id!);
+    this.getAllDepartmentProductionByDepartmentId(this.id)
     this.getAllProducts();
-  }
-
-  getWorkerById(id: string) {
-    this.http.get(`Workers/GetById?Id=${id}`, (res) => {
-      this.workerModel = res.data;
-      console.log(this.workerModel);
-      this.selectedOption = this.workerModel.departmentInfo.departmentName;
-    });
-  }
-
-  getAllWorkerProductionsByUserId(id: string) {
-    this.http.get(`WorkerProductions/GetAllByUserId?Id=${id}`, (res) => {
-      this.workerProductions = res.data;
-      console.log(this.workerProductions);
-    });
-  }
-
-  getAllDepartments() {
-    this.http.get("Departments/GetAll", (res) => {
-      this.departments = res.data;
-      console.log(this.departments);
-    });
   }
 
   getAllProducts() {
@@ -81,37 +51,50 @@ export class WorkerComponent {
     });
   }
 
-  createWorkerProduction(form: NgForm) {
-    this.workerProductionModel.appUserId = this.id;
-    this.workerProductionModel.productId = this.selectedProductId!;
+  getDepartmentById(id: string) {
+    this.http.get(`Departments/GetById?Id=${id}`, (res) => {
+      this.departmentModel = res.data;
+      console.log(this.departmentModel);
+    });
+  }
+
+  updateDepartment(form: NgForm) {
     if (form.valid) {
-      this.http.post("WorkerProductions/Create", this.workerProductionModel, (res) => {
+      this.http.post("Departments/Update", this.departmentModel, (res) => {
         console.log(res);
-        this.getWorkerById(this.id!);
-        this.getAllDepartments();
-        this.getAllWorkerProductionsByUserId(this.id);
+        this.getDepartmentById(this.id!);
+        this.getAllDepartmentProductionByDepartmentId(this.id)
         this.getAllProducts();
       });
     }
   }
 
-  triggerFileInput() {
-    this.fileInput.nativeElement.click();
+  getAllDepartmentProductionByDepartmentId(id: string) {
+    this.http.get(`DepartmentProductions/GetAllByDepartmentId?Id=${id}`, (res) => {
+      this.departmentProductions = res.data;
+      console.log(this.departmentProductions);
+    });
   }
 
-  setImage(event: any) {
-    const file = event.target.files[0];
+  createDepartmentProduction() {
+    this.departmentProductionModel.departmentId = this.id;
+    this.departmentProductionModel.productId = this.selectedProductId!;
+    this.http.post("DepartmentProductions/Create", this.departmentProductionModel, (res) => {
+      console.log(res);
+      this.getDepartmentById(this.id!);
+      this.getAllDepartmentProductionByDepartmentId(this.id)
+      this.getAllProducts();
+    });
+  }
 
-    if (file) {
-      this.workerModel.profilePicture = file.name;
-      console.log(this.workerModel.profilePicture);
-
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.selectedImageUrl = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
+  deleteDepartmentProductionById(id:string) {
+    this.swal.callToastWithButton('Are you sure you want to delete?', 'Yes!', () => {
+      this.http.get(`Departments/DeleteById?Id=${id}`, (res) => {
+        this.getDepartmentById(this.id!);
+        this.getAllDepartmentProductionByDepartmentId(this.id)
+        this.getAllProducts();
+      });
+    });
   }
 
   ngAfterViewInit() {
@@ -154,10 +137,10 @@ export class WorkerComponent {
     });
   }
 
-  selectDepartment(department: DepartmentModel) {
-    this.selectedOption = department.departmentName;
-    this.selectedDepartmentId = department.id!; // Seçilen kategori ID'sini ayarla
-    console.log(this.selectedDepartmentId);
+  selectProduct(product: ProductModel) {
+    this.selectedOption = product.productName;
+    this.selectedProductId = product.id!; // Seçilen kategori ID'sini ayarla
+    console.log(this.selectedProductId);
 
     this.isDropdownOpen = false;
     this.toggleDropdown(
@@ -165,10 +148,5 @@ export class WorkerComponent {
       this.elRef.nativeElement.querySelector('.caret'),
       this.elRef.nativeElement.querySelector('.menu')
     );
-  }
-
-  onProductChange(event: any) {
-    this.selectedProductId = event.target.value;
-    console.log("Seçilen Ürün ID:", this.selectedProductId);
   }
 }

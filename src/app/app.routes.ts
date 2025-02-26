@@ -10,6 +10,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { WorkersComponent } from './components/workers/workers.component';
 import { WorkerComponent } from './components/worker/worker.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { DepartmentComponent } from './components/department/department.component';
+import { WorkerProductionComponent } from './components/worker-production/worker-production.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +32,10 @@ export const routes: Routes = [
                 component: DepartmentsComponent
             },
             {
+                path: "department/:id",
+                component: DepartmentComponent
+            },
+            {
                 path: "machines",
                 component: MachinesComponent
             },
@@ -44,6 +50,10 @@ export const routes: Routes = [
             {
                 path: "worker/:id",
                 component: WorkerComponent
+            },
+            {
+                path: "worker-production/:id",
+                component: WorkerProductionComponent
             },
             {
                 path: "settings",

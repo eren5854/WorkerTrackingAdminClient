@@ -1,7 +1,24 @@
+/* .insights{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+} */
+
 .item1{
     display: grid;
     grid-template-columns: repeat(1,1fr);
 }
+
+/* .right{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1.5rem;
+} */
+
+/* @media (max-width: 500px){
+    .right{
+        grid-template-columns: repeat(1,1fr);
+    }
+} */
 
 .dropdown{
     min-width: 15em;

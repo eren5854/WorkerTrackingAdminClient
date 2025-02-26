@@ -132,7 +132,7 @@
                         <ul class="menu">
                             <li>Kategori seçiniz...</li>
                             <li *ngFor="let department of departments" [attr.data-id]="department.id"
-                                (click)="selectCategory(department)">
+                                (click)="selectDepartment(department)">
                                 {{ department.departmentName }}
                             </li>
                         </ul>

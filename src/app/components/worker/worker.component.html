@@ -1,78 +1,109 @@
 <div style="display: flex;">
-    <h1>Yazar Detayı</h1>
+    <h1>Worker Detail</h1>
 </div>
 
 <div class="insights">
     <div class="sales">
-        <span class="material-symbols-outlined icons">
+        <!-- <span class="material-symbols-outlined icons">
             person
-        </span>
+        </span> -->
         <div class="right">
             <div class="input-box">
                 <!-- <h2>Information</h2> -->
-
-                <div style="display: flex; justify-content: center;" class="input-field mb-2">
+                <div style="display: flex; justify-content: center;">
+                    <img [src]="selectedImageUrl || 'assets/img/default-user-1.png'" class="mb-2" style="width: 150px;">
+                </div>
+                <div class="input-field mb-2">
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="profilePicture">Profile Picture</label>
+                        <!-- <p *ngIf="!workerModel.profilePicture" style="color: red; font-size: 14px;">*</p> -->
                     </div>
-                    <!-- <img style="width: 174px;" src="https://localhost:7268/ProfilePictures/{{userModel.profilePicture}}" alt=""> -->
-                    <img style="width: 174px;" src="{{imageUrl}}ProfilePictures/{{workerModel.profilePicture}}" alt="">
+
+                    <input type="file" #fileInput (change)="setImage($event)" name="mainImage"
+                        class="form-control d-none" id="mainImage" autocomplete="off">
+                    <div class="input-group">
+                        <input type="text" class="form-control mb-3" [value]="workerModel.profilePicture" readonly>
+                        <div class="input-group-append">
+                            <button class="btn" type="button" (click)="triggerFileInput()"><i
+                                    class="fa-solid fa-upload"></i></button>
+                        </div>
+                    </div>
+                    <!-- <input [(ngModel)]="workerModel.profilePicture!" validate type="text" name="profilePicture"
+                        class="form-control" id="profilePicture" required autocomplete="off"> -->
                 </div>
 
                 <div class="input-field mb-2">
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
                         <label for="firstName">First Name</label>
+                        <p *ngIf="!workerModel.firstName" style="color: red; font-size: 14px;">*</p>
                     </div>
                     <input [(ngModel)]="workerModel.firstName!" validate type="text" name="firstName"
-                        class="form-control" id="firstName" readonly autocomplete="off">
+                        class="form-control" id="firstName" required autocomplete="off">
                 </div>
 
                 <div class="input-field mb-2">
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
                         <label for="lastName">Last Name</label>
+                        <p *ngIf="!workerModel.lastName" style="color: red; font-size: 14px;">*</p>
                     </div>
                     <input [(ngModel)]="workerModel.lastName!" validate type="text" name="lastName" class="form-control"
-                        id="lastName" readonly autocomplete="off">
-                </div>
-
-                <div class="input-field mb-2">
-                    <div style="display: flex; gap: 0.5rem; height: 21px;">
-                        <label for="userName">User Name</label>
-                    </div>
-                    <input [(ngModel)]="workerModel.userName" validate type="text" name="userName" class="form-control"
-                        id="userName" readonly autocomplete="off">
+                        id="lastName" required autocomplete="off">
                 </div>
             </div>
         </div>
     </div>
 
     <div class="sales">
-        <span class="material-symbols-outlined icons">
+        <!-- <span class="material-symbols-outlined icons">
             person
-        </span>
+        </span> -->
         <div class="right">
             <div class="input-box">
                 <div class="input-field mb-2">
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
-                        <label for="lastName">Date Of Birth</label>
+                        <label for="userName">Nick Name</label>
+                        <p *ngIf="!workerModel.userName" style="color: red; font-size: 14px;">*</p>
                     </div>
-                    <label type="text" name="dateOfBirth" class="form-control" id="dateOfBirth" readonly
-                        autocomplete="off">{{workerModel.dateOfBirth | date: 'dd/MM/yyyy'}}</label>
+                    <input [(ngModel)]="workerModel.userName" validate type="text" name="userName" class="form-control"
+                        id="userName" required autocomplete="off">
                 </div>
 
                 <div class="input-field mb-2">
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
-                        <label for="userName">Gender</label>
+                        <label for="dateOfBirth">Date Of Birth</label>
+                        <!-- <p *ngIf="!workerModel.dateOfBirth" style="color: red; font-size: 14px;">*</p> -->
                     </div>
-                    <label type="text" name="gender" class="form-control" id="gender" readonly
-                        autocomplete="off"></label>
+                    <input [(ngModel)]="workerModel.dateOfBirth" validate type="date" name="dateOfBirth"
+                        class="form-control" id="dateOfBirth" autocomplete="off">
                 </div>
 
                 <div class="input-field mb-2">
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
-                        <label for="userName">Role</label>
+                        <label for="gender">Gender</label>
+                        <!-- <p *ngIf="!workerModel.gender" style="color: red; font-size: 14px;">*</p> -->
                     </div>
-                    <input [(ngModel)]="workerModel.role.name" validate type="text" name="role" class="form-control"
-                        id="role" readonly autocomplete="off">
+                    <input [(ngModel)]="workerModel.gender!" validate type="text" name="gender" class="form-control"
+                        id="gender" autocomplete="off">
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="departmentId">Department</label>
+                        <p *ngIf="!workerModel.departmentId" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <!-- <input [(ngModel)]="workerModel.departmentId" validate type="text" name="departmentId"
+                        class="form-control" id="departmentId" required autocomplete="off"> -->
+                    <div class="select">
+                        <span class="selected">{{ selectedOption }}</span> <!-- Seçilen öğeyi göster -->
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="menu">
+                        <li>Kategori seçiniz...</li>
+                        <li *ngFor="let department of departments" [attr.data-id]="department.id"
+                            (click)="selectDepartment(department)">
+                            {{ department.departmentName }}
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="input-field mb-2">
@@ -82,50 +113,123 @@
                     <label type="text" name="role" class="form-control" id="role" readonly
                         autocomplete="off">{{workerModel.createdDate | date: 'dd/MM/yyyy - hh:mm'}}</label>
                 </div>
+
+                <div class="input-field">
+                    <div class="btns">
+                        <button [disabled]="" class="submit">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Update
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="input-field">
-        <div class="btns">
-            <button [disabled]="" class="submit">
-                <i class="fa-solid fa-floppy-disk"></i>
-                Save
-            </button>
-        </div>
-    </div>
-
-
-    <!-- <div class="sales item1">
-        <span class="material-symbols-outlined icons">
+    <div class="sales">
+        <!-- <span class="material-symbols-outlined icons">
             person
-        </span>
+        </span> -->
         <div class="right">
             <div class="input-box">
-                <h2>Blog yazıları</h2>
+                <h2>Add Product Targets</h2>
+                <form #createWorkerProductionForm="ngForm"
+                    (ngSubmit)="createWorkerProduction(createWorkerProductionForm)">
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="departmentId">Product</label>
+                            <p *ngIf="!workerModel.departmentId" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <!-- <input [(ngModel)]="workerModel.departmentId" validate type="text" name="departmentId"
+                        class="form-control" id="departmentId" required autocomplete="off"> -->
+                        <select class="form-control" (change)="onProductChange($event)">
+                            <option value="">Select product...</option>
+                            <option *ngFor="let product of products" [value]="product.id">{{ product.productName }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="dailyTarget">Daily Target</label>
+                            <p *ngIf="!workerProductionModel.dailyTarget" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="workerProductionModel.dailyTarget!" validate type="number"
+                            name="dailyTarget" class="form-control" id="dailyTarget" required autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="weeklyTarget">Weekly Target</label>
+                            <!-- <p *ngIf="!workerProductionModel.weeklyTarget" style="color: red; font-size: 14px;">*</p> -->
+                        </div>
+                        <input [(ngModel)]="workerProductionModel.weeklyTarget!" validate type="number"
+                            name="weeklyTarget" class="form-control" id="weeklyTarget" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="monthlyTarget">Monthly Target</label>
+                            <!-- <p *ngIf="!workerProductionModel.monthlyTarget" style="color: red; font-size: 14px;">*</p> -->
+                        </div>
+                        <input [(ngModel)]="workerProductionModel.monthlyTarget!" validate type="number"
+                            name="monthlyTarget" class="form-control" id="monthlyTarget" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="yearlyTarget">Yearly Target</label>
+                            <!-- <p *ngIf="!workerProductionModel.yearlyTarget" style="color: red; font-size: 14px;">*</p> -->
+                        </div>
+                        <input [(ngModel)]="workerProductionModel.yearlyTarget!" validate type="number"
+                            name="yearlyTarget" class="form-control" id="yearlyTarget" autocomplete="off">
+                    </div>
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit" type="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="insights item1 mb-3">
+
+    <div class="sales">
+        <div class="right">
+            <div class="input-box">
+                <h2>{{workerModel.fullName}} Productions</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Başlık</th>
-                            <th scope="col"><i class="fa-solid fa-eye"></i></th>
-                            <th scope="col"><i class="fa-solid fa-thumbs-up"></i></th>
-                            <th scope="col"><i class="fa-solid fa-comment"></i></th>
-                            <th scope="col"><i class="fa-solid fa-gears"></i></th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Daily Target</th>
+                            <th scope="col">Daily Actual</th>
+                            <th scope="col">Weekly Target</th>
+                            <th scope="col">Weekly Actual</th>
+                            <th scope="col">Operations</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for(blog of blogs; track blog){
+                        @for(workerProduction of workerProductions; track workerProduction){
                         <tr>
-                            <td>{{blog.title}}</td>
-                            <td>{{blog.viewCount}}</td>
-                            <td>{{blog.likeCount}}</td>
-                            <td>{{blog.commentCount}}</td>
+                            <td>{{workerProduction.productInfo.productName}}</td>
+                            <td>{{workerProduction.dailyTarget}}</td>
+                            <td>{{workerProduction.dailyActual}}</td>
+                            <td>{{workerProduction.weeklyTarget}}</td>
+                            <td>{{workerProduction.weeklyActual}}</td>
                             <td>
-                                <a routerLink="/blog-detail/{{blog.id}}"><button class="btn btn-success mr-2"><i
+                                <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
                                             class="fa-solid fa-eye"></i></button></a>
-                                <button class="btn btn-danger"
-                                    (click)="deleteBlogById(blog.id!, workerModel.id!, blog.title)"><i
-                                        class="fa-solid fa-trash"></i></button>
+                                <!-- <button class="btn btn-danger"
+                                    (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
+                                        class="fa-solid fa-trash"></i></button> -->
                             </td>
                         </tr>
                         }
@@ -133,5 +237,5 @@
                 </table>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>

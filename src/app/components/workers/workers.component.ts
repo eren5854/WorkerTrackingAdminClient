@@ -132,7 +132,7 @@ export class WorkersComponent {
     });
   }
 
-  selectCategory(department: DepartmentModel) {
+  selectDepartment(department: DepartmentModel) {
     this.selectedOption = department.departmentName;
     this.selectedDepartmentId = department.id!; // Seçilen kategori ID'sini ayarla
     console.log(this.selectedDepartmentId);

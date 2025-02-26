@@ -5,11 +5,12 @@ import { HttpService } from '../../services/http.service';
 import { SwalService } from '../../services/swal.service';
 import { AuthService } from '../../services/auth.service';
 import { DepartmentModel } from '../../models/department.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-departments',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './departments.component.html',
   styleUrl: './departments.component.css'
 })

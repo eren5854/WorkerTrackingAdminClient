@@ -1,12 +1,80 @@
 <div style="display: flex;">
     <h1>Departments</h1>
-    <span (click)="addCard()" style="font-size: 34px; color: green; cursor: pointer;"
+    <!-- <span (click)="addCard()" style="font-size: 34px; color: green; cursor: pointer;"
         class="material-symbols-outlined ms-3">
         add_circle
-    </span>
+    </span> -->
 </div>
 
-<div class="insights">
+<div class="insights" style="display: flex;">
+    <table class="table table-striped" style="margin-top: 70px;">
+        <thead>
+            <tr>
+                <th scope="col">Department Name</th>
+                <th scope="col">Department Description</th>
+                <th scope="col">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(department of departments; track department){
+            <tr>
+                <td>{{department.departmentName}}</td>
+                <td>{{department.departmentDescription}}</td>
+                <td>
+                    <button class="btn btn-success mr-2"><a routerLink="/department/{{department.id}}"><i
+                                class="fa-solid fa-eye"></i></a></button>
+                    <!-- <button class="btn btn-success mr-2" (click)="openModal(user)"><i
+                            class="fa-solid fa-eye"></i></button> -->
+                    <button class="btn btn-danger" (click)="deleteDepartmentById(department.id!)"><i
+                            class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="insights item1">
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            engineering
+        </span>
+        <h2 class="mt-2">Add Department</h2>
+        <div class="right">
+            <div class="input-box">
+                <form #createDepartmentForm="ngForm" (ngSubmit)="createDepartment(createDepartmentForm)">
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="departmentName">Department Name</label>
+                            <p *ngIf="!departmentModel.departmentName" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="departmentModel.departmentName!" validate type="text" name="departmentName"
+                            class="form-control" id="departmentName" autocomplete="off">
+                    </div>
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="departmentDescription">Department Description</label>
+                            <p *ngIf="!departmentModel.departmentDescription" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="departmentModel.departmentDescription" validate type="text"
+                            name="departmentDescription" class="form-control" id="departmentDescription" required
+                            autocomplete="off">
+                    </div>
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit" type="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="insights">
 
     <div *ngIf="addCardDiv" class="sales">
         <span class="material-symbols-outlined icons">
@@ -30,7 +98,6 @@
                         <div class="btns">
                             <button [disabled]="" class="submit">
                                 <i class="fa-solid fa-floppy-disk "></i>
-                                <!-- Save -->
                             </button>
                         </div>
                     </div>
@@ -80,4 +147,4 @@
         </div>
     }
     
-</div>
+</div> -->

@@ -1,0 +1,166 @@
+<div style="display: flex;">
+    <h1>{{departmentModel.departmentName}} Department</h1>
+</div>
+
+<div class="insights">
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            apartment
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <form #updateDepartmentForm="ngForm" (ngSubmit)="updateDepartment(updateDepartmentForm)">
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="firstName">Department Name</label>
+                        </div>
+                        <input [(ngModel)]="departmentModel.departmentName!" validate type="text" name="firstName"
+                            class="form-control" id="firstName" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="lastName">Department Description</label>
+                        </div>
+                        <input [(ngModel)]="departmentModel.departmentDescription!" validate type="text" name="lastName"
+                            class="form-control" id="lastName" autocomplete="off">
+                    </div>
+                    <div class="input-field">
+                        <div class="btns">
+                            <button [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Update
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            engineering
+        </span>
+        <h2 class="mt-2">Add Department Production</h2>
+        <div class="right">
+
+                <div class="input-box">
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="departmentId">Product</label>
+                            <p *ngIf="!departmentProductionModel.departmentId" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <!-- <input [(ngModel)]="workerModel.departmentId" validate type="text" name="departmentId"
+                            class="form-control" id="departmentId" required autocomplete="off"> -->
+                        <div class="select">
+                            <span class="selected">{{ selectedOption }}</span> <!-- Seçilen öğeyi göster -->
+                            <div class="caret"></div>
+                        </div>
+                        <ul class="menu">
+                            <li>Select Product...</li>
+                            <li *ngFor="let product of products" [attr.data-id]="product.id"
+                                (click)="selectProduct(product)">
+                                {{ product.productName }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="dailyTarget">Daily Target</label>
+                            <p *ngIf="!departmentProductionModel.dailyTarget" style="color: red; font-size: 14px;">*</p>
+                        </div>
+                        <input [(ngModel)]="departmentProductionModel.dailyTarget!" validate type="number" name="dailyTarget" class="form-control"
+                            id="dailyTarget" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="weeklyTarget">Weekly Target</label>
+                            <!-- <p *ngIf="!departmentProductionModel.weeklyTarget" style="color: red; font-size: 14px;">*</p> -->
+                        </div>
+                        <input [(ngModel)]="departmentProductionModel.weeklyTarget" type="number" name="weeklyTarget" class="form-control"
+                            id="weeklyTarget" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="monthlyTarget">Monthly Target</label>
+                            <!-- <p *ngIf="!departmentProductionModel.monthlyTarget" style="color: red; font-size: 14px;">*</p> -->
+                        </div>
+                        <input [(ngModel)]="departmentProductionModel.monthlyTarget" type="number" name="monthlyTarget" class="form-control"
+                            id="monthlyTarget" autocomplete="off">
+                    </div>
+
+                    <div class="input-field mb-2">
+                        <div style="display: flex; gap: 0.5rem; height: 21px;">
+                            <label for="yearlyTarget">Yearly Target</label>
+                            <!-- <p *ngIf="!departmentProductionModel.yearlyTarget" style="color: red; font-size: 14px;">*</p> -->
+                        </div>
+                        <input [(ngModel)]="departmentProductionModel.yearlyTarget"  type="number" name="yearlyTarget" class="form-control"
+                            id="yearlyTarget" autocomplete="off">
+                    </div>
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button (click)="createDepartmentProduction()" [disabled]="" class="submit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
+        </div>
+    </div>
+
+
+
+    
+</div>
+
+<div class="insights item1">
+
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            person
+        </span>
+        <div class="right">
+            <div class="input-box">
+                <h2>{{departmentModel.departmentName}} Department Productions</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Daily Target</th>
+                            <th scope="col">Daily Actual</th>
+                            <th scope="col">Weekly Target</th>
+                            <th scope="col">Weekly Actual</th>
+                            <th scope="col">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(departmentProduction of departmentProductions; track departmentProduction){
+                        <tr>
+                            <td>{{departmentProduction.productInfo.productName}}</td>
+                            <td>{{departmentProduction.dailyTarget}}</td>
+                            <td>{{departmentProduction.dailyActual}}</td>
+                            <td>{{departmentProduction.weeklyTarget}}</td>
+                            <td>{{departmentProduction.weeklyActual}}</td>
+                            <td>
+                                <a routerLink="/blog-detail/{{departmentProduction.id}}"><button class="btn btn-success mr-2"><i
+                                            class="fa-solid fa-eye"></i></button></a>
+                                <button class="btn btn-danger"
+                                    (click)="deleteDepartmentProductionById(departmentProduction.id!)"><i
+                                        class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
