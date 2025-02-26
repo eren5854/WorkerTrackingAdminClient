@@ -116,7 +116,7 @@
 
                 <div class="input-field">
                     <div class="btns">
-                        <button [disabled]="" class="submit">
+                        <button [disabled]="" class="submit" (click)="updateWorker()">
                             <i class="fa-solid fa-floppy-disk"></i>
                             Update
                         </button>
@@ -210,9 +210,9 @@
                         <tr>
                             <th scope="col">Product</th>
                             <th scope="col">Daily Target</th>
-                            <th scope="col">Daily Actual</th>
                             <th scope="col">Weekly Target</th>
-                            <th scope="col">Weekly Actual</th>
+                            <th scope="col">Monthly Target</th>
+                            <th scope="col">Yearly Target</th>
                             <th scope="col">Operations</th>
                         </tr>
                     </thead>
@@ -221,12 +221,12 @@
                         <tr>
                             <td>{{workerProduction.productInfo.productName}}</td>
                             <td>{{workerProduction.dailyTarget}}</td>
-                            <td>{{workerProduction.dailyActual}}</td>
                             <td>{{workerProduction.weeklyTarget}}</td>
-                            <td>{{workerProduction.weeklyActual}}</td>
+                            <td>{{workerProduction.monthlyTarget}}</td>
+                            <td>{{workerProduction.yearlyTarget}}</td>
                             <td>
-                                <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
-                                            class="fa-solid fa-eye"></i></button></a>
+                                <a routerLink="/worker-production/{{workerProduction.id}}"><button
+                                        class="btn btn-success mr-2"><i class="fa-solid fa-eye"></i></button></a>
                                 <!-- <button class="btn btn-danger"
                                     (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
                                         class="fa-solid fa-trash"></i></button> -->

@@ -19,7 +19,7 @@
                 <td>{{worker.lastName}}</td>
                 <td>{{worker.departmentInfo.departmentName}}</td>
                 <td>
-                    <button class="btn btn-success mr-2"><a routerLink="/worker/{{worker.id}}"><i class="fa-solid fa-eye"></i></a></button>
+                    <button routerLink="/worker/{{worker.id}}" class="btn btn-success mr-2"><a ><i class="fa-solid fa-eye"></i></a></button>
                     <!-- <button class="btn btn-success mr-2" (click)="openModal(user)"><i
                             class="fa-solid fa-eye"></i></button> -->
                     <!-- <button class="btn btn-danger" (click)="deleteUserById(worker.id!, worker.userName)"><i

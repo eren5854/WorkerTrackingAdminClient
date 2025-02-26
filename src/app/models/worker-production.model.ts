@@ -1,3 +1,8 @@
+import { WorkerDailyProductionModel } from "./worker-daily-production.model";
+import { WorkerMonthlyProductionModel } from "./worker-monthly-production.model";
+import { WorkerWeeklyProductionModel } from "./worker-weekly-production.model";
+import { WorkerYearlyProductionModel } from "./worker-yearly-production.model";
+
 export class WorkerProductionModel{
     id?:string;
     appUserId:string = "";
@@ -17,4 +22,8 @@ export class WorkerProductionModel{
     weeklyYield?:number;
     monthlyYield?:number;
     yearlyYield?:number;
+    dailyProductions?:WorkerDailyProductionModel;
+    weeklyProductions?:WorkerWeeklyProductionModel;
+    monthlyProductions?:WorkerMonthlyProductionModel;
+    yearlyProductions?:WorkerYearlyProductionModel;
 }

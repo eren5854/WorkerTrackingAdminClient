@@ -57,6 +57,8 @@ export class WorkerComponent {
       this.workerModel = res.data;
       console.log(this.workerModel);
       this.selectedOption = this.workerModel.departmentInfo.departmentName;
+      this.selectedDepartmentId = this.workerModel.departmentInfo.departmentId!;
+      this.selectedImageUrl = this.imageUrl + "ProfilePictures/" + this.workerModel.profilePicture;
     });
   }
 
@@ -78,6 +80,25 @@ export class WorkerComponent {
     this.http.get("Products/GetAll", (res) => {
       this.products = res.data;
       console.log(this.products);
+    });
+  }
+
+  updateWorker() {
+    const formData = new FormData();
+    formData.append("id", this.workerModel.id!);
+    formData.append("firstName", this.workerModel.firstName!);
+    formData.append("lastName", this.workerModel.lastName!);
+    formData.append("userName", this.workerModel.userName!);
+    formData.append("dateOfBirth", this.workerModel.dateOfBirth);
+    formData.append("gender", this.workerModel.gender);
+    formData.append("departmentId", this.selectedDepartmentId!);
+    formData.append("profilePicture", this.fileInput.nativeElement.files[0]);
+    this.http.post("Workers/Update", formData, (res) => {
+      console.log(res);
+      this.getWorkerById(this.id!);
+      this.getAllDepartments();
+      this.getAllWorkerProductionsByUserId(this.id);
+      this.getAllProducts();
     });
   }
 

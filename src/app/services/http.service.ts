@@ -7,7 +7,7 @@ import { SwalService } from './swal.service';
   providedIn: 'root'
 })
 export class HttpService {
-  imageUrl:string = "https://192.168.68.134:45455/api/";
+  imageUrl:string = "https://192.168.68.134:45455/";
   // imageUrl:string = "https://alternatifmuhendis.webapi.erendelibas.com/" 
   url:string = "https://192.168.68.134:45455/api/";
   // url:string = "https://alternatifmuhendis.webapi.erendelibas.com/api/"

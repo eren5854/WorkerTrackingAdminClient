@@ -6,6 +6,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { WorkerProductionModel } from '../../models/worker-production.model';
 import { ProductModel } from '../../models/product.model';
+import { WorkerDailyProductionModel } from '../../models/worker-daily-production.model';
+import { WorkerWeeklyProductionModel } from '../../models/worker-weekly-production.model';
+import { WorkerMonthlyProductionModel } from '../../models/worker-monthly-production.model';
+import { WorkerYearlyProductionModel } from '../../models/worker-yearly-production.model';
 
 @Component({
   selector: 'app-worker-production',
@@ -17,9 +21,15 @@ import { ProductModel } from '../../models/product.model';
 export class WorkerProductionComponent {
   id: string = "";
   workerProductionModel: WorkerProductionModel = new WorkerProductionModel();
+  workerDailyProductions: WorkerDailyProductionModel[] = [];
+  workerWeeklyProductions: WorkerWeeklyProductionModel[] = [];
+  workerMonthlyProductions: WorkerMonthlyProductionModel[] = [];
+  workerYearlyProductions: WorkerYearlyProductionModel[] = [];
   products: ProductModel[] = [];
 
   selectedProductId: string | null = null;
+  currentProductId?: string;
+  selectedProductName: string | null = null;
 
   constructor(
     private http: HttpService,
@@ -38,10 +48,39 @@ export class WorkerProductionComponent {
     this.getAllProducts();
   }
 
-  getWorkerProductionById(id:string){
+  getWorkerProductionById(id: string) {
     this.http.get(`WorkerProductions/GetById?Id=${id}`, (res) => {
-      this.workerProductionModel = res.data;
-      console.log(this.workerProductionModel);
+      if (res && res.data) {
+        this.workerProductionModel = res.data;
+        
+        if (Array.isArray(this.workerProductionModel.dailyProductions)) {
+          this.workerDailyProductions = [...this.workerProductionModel.dailyProductions];
+        } else {
+          this.workerDailyProductions = [];
+        }
+
+        if (Array.isArray(this.workerProductionModel.weeklyProductions)) {
+          this.workerWeeklyProductions = [...this.workerProductionModel.weeklyProductions];
+        } else {
+          this.workerWeeklyProductions = [];
+        }
+
+        if (Array.isArray(this.workerProductionModel.monthlyProductions)) {
+          this.workerMonthlyProductions = [...this.workerProductionModel.monthlyProductions];
+        } else {
+          this.workerMonthlyProductions = [];
+        }
+
+        if (Array.isArray(this.workerProductionModel.yearlyProductions)) {
+          this.workerYearlyProductions = [...this.workerProductionModel.yearlyProductions];
+        } else {
+          this.workerYearlyProductions = [];
+        }
+
+        this.selectedProductName = this.workerProductionModel.productInfo.productName;
+        this.selectedProductId = this.workerProductionModel.productInfo.productId;
+        this.currentProductId = this.selectedProductId!;
+      }
     });
   }
 
@@ -52,8 +91,14 @@ export class WorkerProductionComponent {
     });
   }
 
-  updateWorkerProduction(form:NgForm){
-    
+  updateWorkerProduction(form: NgForm) {
+    this.workerProductionModel.appUserId = this.workerProductionModel.appUserInfo.appUserId;
+    this.workerProductionModel.productId = this.selectedProductId!;
+    if (form.valid) {
+      this.http.post("WorkerProductions/Update", this.workerProductionModel, (res) => {
+        console.log(res);
+      });
+    }
   }
 
   onProductChange(event: any) {

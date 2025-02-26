@@ -1,23 +1,24 @@
-<div style="display: flex;">
-    <h1>Worker Product Detail</h1>
+<div style="display: flex; flex-direction: column;">
+    <h1>{{workerProductionModel.appUserInfo.fullName}}</h1>
+    <h2>Production Detail</h2>
 </div>
 
-<div class="insights item1">
+<div class="insights">
     <div class="sales">
         <!-- <span class="material-symbols-outlined icons">
             person
         </span> -->
         <div class="right">
             <div class="input-box">
-                <h2>Add Product Targets</h2>
+                <h2>Production Info</h2>
                 <form #updateWorkerProductionForm="ngForm"
                     (ngSubmit)="updateWorkerProduction(updateWorkerProductionForm)">
                     <div class="input-field mb-2">
                         <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="departmentId">Product</label>
+                            <label for="productId">Product</label>
                         </div>
                         <select class="form-control" (change)="onProductChange($event)">
-                            <option value="">Select product...</option>
+                            <option [value]="currentProductId">{{selectedProductName}}</option>
                             <option *ngFor="let product of products" [value]="product.id">{{ product.productName }}
                             </option>
                         </select>
@@ -35,7 +36,6 @@
                     <div class="input-field mb-2">
                         <div style="display: flex; gap: 0.5rem; height: 21px;">
                             <label for="weeklyTarget">Weekly Target</label>
-                            <!-- <p *ngIf="!workerProductionModel.weeklyTarget" style="color: red; font-size: 14px;">*</p> -->
                         </div>
                         <input [(ngModel)]="workerProductionModel.weeklyTarget!" validate type="number"
                             name="weeklyTarget" class="form-control" id="weeklyTarget" autocomplete="off">
@@ -44,7 +44,6 @@
                     <div class="input-field mb-2">
                         <div style="display: flex; gap: 0.5rem; height: 21px;">
                             <label for="monthlyTarget">Monthly Target</label>
-                            <!-- <p *ngIf="!workerProductionModel.monthlyTarget" style="color: red; font-size: 14px;">*</p> -->
                         </div>
                         <input [(ngModel)]="workerProductionModel.monthlyTarget!" validate type="number"
                             name="monthlyTarget" class="form-control" id="monthlyTarget" autocomplete="off">
@@ -53,7 +52,6 @@
                     <div class="input-field mb-2">
                         <div style="display: flex; gap: 0.5rem; height: 21px;">
                             <label for="yearlyTarget">Yearly Target</label>
-                            <!-- <p *ngIf="!workerProductionModel.yearlyTarget" style="color: red; font-size: 14px;">*</p> -->
                         </div>
                         <input [(ngModel)]="workerProductionModel.yearlyTarget!" validate type="number"
                             name="yearlyTarget" class="form-control" id="yearlyTarget" autocomplete="off">
@@ -71,39 +69,88 @@
             </div>
         </div>
     </div>
+
+    <div class="sales">
+        <!-- <span class="material-symbols-outlined icons">
+            person
+        </span> -->
+        <div class="right">
+            <div class="input-box">
+                <!-- <h2>Production Info</h2> -->
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="dailyTarget">Daily Actual: {{workerProductionModel.dailyActual!}}</label>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="dailyTarget">Daily Yield: {{workerProductionModel.dailyYield!}}</label>
+                    </div>
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="weeklyTarget">Weekly Actual: {{workerProductionModel.weeklyActual}}</label>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="weeklyTarget">Weekly Yield: {{workerProductionModel.weeklyYield}}</label>
+                    </div>
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="monthlyTarget">Monthly Actual: {{workerProductionModel.monthlyActual}}</label>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="monthlyTarget">Monthly Yield: {{workerProductionModel.monthlyYield}}</label>
+                    </div>
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="yearlyTarget">Yearly Actual: {{workerProductionModel.yearlyActual}}</label>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="yearlyTarget">Yearly Yield: {{workerProductionModel.yearlyYield}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- <div class="insights item1 mb-3">
+
+<div class="insights item1">
+
 
     <div class="sales">
         <div class="right">
             <div class="input-box">
-                <h2>{{workerModel.fullName}} Productions</h2>
+                <h2>Daily Productions Records</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Product</th>
                             <th scope="col">Daily Target</th>
                             <th scope="col">Daily Actual</th>
-                            <th scope="col">Weekly Target</th>
-                            <th scope="col">Weekly Actual</th>
-                            <th scope="col">Operations</th>
+                            <th scope="col">Daily Yield</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for(workerProduction of workerProductions; track workerProduction){
+                        @for(workerDailyProduction of workerDailyProductions; track workerDailyProduction){
                         <tr>
-                            <td>{{workerProduction.productInfo.productName}}</td>
-                            <td>{{workerProduction.dailyTarget}}</td>
-                            <td>{{workerProduction.dailyActual}}</td>
-                            <td>{{workerProduction.weeklyTarget}}</td>
-                            <td>{{workerProduction.weeklyActual}}</td>
+                            <td>{{workerDailyProduction.dailyTarget}}</td>
+                            <td>{{workerDailyProduction.dailyActual}}</td>
+                            <td>{{workerDailyProduction.dailyYield}}</td>
+                            <td>{{workerDailyProduction.dateStart | date: "dd/MM/yyyy - HH:mm"}}</td>
+                            <td>{{workerDailyProduction.dateEnd | date: "dd/MM/yyyy - HH:mm"}}</td>
                             <td>
-                                <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
+                                {{workerDailyProduction.isActive}}
+                                <!-- <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
                                             class="fa-solid fa-eye"></i></button></a>
                                 <button class="btn btn-danger"
                                     (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
-                                        class="fa-solid fa-trash"></i></button>
+                                        class="fa-solid fa-trash"></i></button> -->
                             </td>
                         </tr>
                         }
@@ -112,4 +159,126 @@
             </div>
         </div>
     </div>
-</div> -->
+
+    <div class="sales">
+        <div class="right">
+            <div class="input-box">
+                <h2>Weekly Productions Records</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Weekly Target</th>
+                            <th scope="col">Weekly Actual</th>
+                            <th scope="col">Weekly Yield</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(workerWeeklyProduction of workerWeeklyProductions; track workerWeeklyProduction){
+                        <tr>
+                            <td>{{workerWeeklyProduction.weeklyTarget}}</td>
+                            <td>{{workerWeeklyProduction.weeklyActual}}</td>
+                            <td>{{workerWeeklyProduction.weeklyYield}}</td>
+                            <td>{{workerWeeklyProduction.dateStart | date: "dd/MM/yyyy - HH:mm"}}</td>
+                            <td>{{workerWeeklyProduction.dateEnd | date: "dd/MM/yyyy - HH:mm"}}</td>
+                            <td>
+                                {{workerWeeklyProduction.isActive}}
+                                <!-- <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
+                                            class="fa-solid fa-eye"></i></button></a>
+                                <button class="btn btn-danger"
+                                    (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
+                                        class="fa-solid fa-trash"></i></button> -->
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="sales">
+        <div class="right">
+            <div class="input-box">
+                <h2>Monthly Productions Records</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Monthly Target</th>
+                            <th scope="col">Monthly Actual</th>
+                            <th scope="col">Monthly Yield</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(workerMonthlyProduction of workerMonthlyProductions; track workerMonthlyProduction){
+                        <tr>
+                            <td>{{workerMonthlyProduction.monthlyTarget}}</td>
+                            <td>{{workerMonthlyProduction.monthlyActual}}</td>
+                            <td>{{workerMonthlyProduction.monthlyYield}}</td>
+                            <td>{{workerMonthlyProduction.dateStart | date: "dd/MM/yyyy - HH:mm"}}</td>
+                            <td>{{workerMonthlyProduction.dateEnd | date: "dd/MM/yyyy - HH:mm"}}</td>
+                            <td>
+                                {{workerMonthlyProduction.isActive}}
+                                <!-- <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
+                                            class="fa-solid fa-eye"></i></button></a>
+                                <button class="btn btn-danger"
+                                    (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
+                                        class="fa-solid fa-trash"></i></button> -->
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="sales">
+        <div class="right">
+            <div class="input-box">
+                <h2>Yearly Productions Records</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Yearly Target</th>
+                            <th scope="col">Yearly Actual</th>
+                            <th scope="col">Yearly Yield</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(workerYearlyProduction of workerYearlyProductions; track workerYearlyProduction){
+                        <tr>
+                            <td>{{workerYearlyProduction.yearlyTarget}}</td>
+                            <td>{{workerYearlyProduction.yearlyActual}}</td>
+                            <td>{{workerYearlyProduction.yearlyYield}}</td>
+                            <td>{{workerYearlyProduction.dateStart | date: "dd/MM/yyyy - HH:mm"}}</td>
+                            <td>{{workerYearlyProduction.dateEnd | date: "dd/MM/yyyy - HH:mm"}}</td>
+                            <td>
+                                {{workerYearlyProduction.isActive}}
+                                <!-- <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
+                                            class="fa-solid fa-eye"></i></button></a>
+                                <button class="btn btn-danger"
+                                    (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
+                                        class="fa-solid fa-trash"></i></button> -->
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="insights item1 mb-3">
+
+
+</div>
