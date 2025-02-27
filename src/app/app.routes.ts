@@ -12,6 +12,7 @@ import { WorkerComponent } from './components/worker/worker.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { DepartmentComponent } from './components/department/department.component';
 import { WorkerProductionComponent } from './components/worker-production/worker-production.component';
+import { WorkerAssignmentsComponent } from './components/worker-assignments/worker-assignments.component';
 
 export const routes: Routes = [
     {
@@ -54,6 +55,10 @@ export const routes: Routes = [
             {
                 path: "worker-production/:id",
                 component: WorkerProductionComponent
+            },
+            {
+                path: "worker-assignments",
+                component: WorkerAssignmentsComponent
             },
             {
                 path: "settings",

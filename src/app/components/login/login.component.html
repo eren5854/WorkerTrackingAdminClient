@@ -26,7 +26,11 @@
           <p style="cursor: pointer;" href="#" (click)="showModal = true" class="login__forgot">Forgot Password?</p>
        </div>
  
-       <button type="submit" class="login__button">Login</button>
+       <!-- <button type="submit" class="login__button">Login</button> -->
+       <button type="submit" class="login__button" [disabled]="isLoading">
+         <span *ngIf="!isLoading">Login</span>
+         <span *ngIf="isLoading" class="lds-dual-ring"></span>
+       </button>
  
        <!-- <div class="login__register">
            Don't have an account? <a href="#">Register</a>

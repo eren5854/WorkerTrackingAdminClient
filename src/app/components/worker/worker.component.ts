@@ -8,19 +8,21 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { DepartmentModel } from '../../models/department.model';
 import { WorkerProductionModel } from '../../models/worker-production.model';
 import { ProductModel } from '../../models/product.model';
+import { WorkerAssignmentModel } from '../../models/worker-assignment.model';
 
 @Component({
-    selector: 'app-worker',
-    standalone:true,
-    imports: [CommonModule, FormsModule, RouterLink],
-    templateUrl: './worker.component.html',
-    styleUrl: './worker.component.css'
+  selector: 'app-worker',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink],
+  templateUrl: './worker.component.html',
+  styleUrl: './worker.component.css'
 })
 export class WorkerComponent {
   workerModel: UserModel = new UserModel();
   departments: DepartmentModel[] = [];
   workerProductions: WorkerProductionModel[] = [];
   workerProductionModel: WorkerProductionModel = new WorkerProductionModel();
+  workerAssignments: WorkerAssignmentModel[] = [];
   products: ProductModel[] = [];
   id: string = "";
   imageUrl?: string;
@@ -50,6 +52,7 @@ export class WorkerComponent {
     this.getAllDepartments();
     this.getAllWorkerProductionsByUserId(this.id);
     this.getAllProducts();
+    this.getAllWorkerAssignmentsByAppUserId(this.id);
   }
 
   getWorkerById(id: string) {
@@ -80,6 +83,13 @@ export class WorkerComponent {
     this.http.get("Products/GetAll", (res) => {
       this.products = res.data;
       console.log(this.products);
+    });
+  }
+
+  getAllWorkerAssignmentsByAppUserId(id: string) {
+    this.http.get(`WorkerAssignments/GetAllByAppUserId?Id=${id}`, (res) => {
+      this.workerAssignments = res.data;
+      console.log(this.workerAssignments);
     });
   }
 
@@ -116,7 +126,7 @@ export class WorkerComponent {
     }
   }
 
-  deleteWorkerById(id:string, name:string){
+  deleteWorkerById(id: string, name: string) {
     this.swal.callToastWithButton(`Are you sure you want to delete employee named ${name}?`, 'Yes!', () => {
       this.http.get(`Workers/DeleteById?Id=${id}`, (res) => {
         this.router.navigateByUrl("/workers");

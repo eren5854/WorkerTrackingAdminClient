@@ -19,6 +19,7 @@ export class LoginComponent {
   loginModel: LoginModel = new LoginModel();
   showModal = false;
   emailModel: ForgotPasswordModel = new ForgotPasswordModel();
+  isLoading: boolean = false; // Spinner için değişken
 
   constructor(
     private http: HttpClient,
@@ -31,6 +32,8 @@ export class LoginComponent {
 
   login(form: NgForm) {
     if (form.valid) {
+      this.isLoading = true; // Spinner başlat
+      
       this.http.post(`${this.url}Auth/Login`, this.loginModel)
         .subscribe({
           next: (res: any) => {
@@ -40,8 +43,12 @@ export class LoginComponent {
             this.router.navigateByUrl("/");
           },
           error: (err: HttpErrorResponse) => {
-            console.log(err)
+            console.log(err);
             this.swal.callToast(err.error.errorMessages[0], 'warning');
+            this.isLoading = false; // Başarısız girişte butonu eski haline getir
+          },
+          complete: () => {
+            this.isLoading = false; // İşlem tamamlandığında butonu eski haline getir
           }
         });
     }
