@@ -7,11 +7,11 @@ import { SwalService } from '../../services/swal.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    standalone:true,
+    imports: [CommonModule, FormsModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css'
 })
 export class LoginComponent {
   url:string = "https://192.168.68.134:45455/api/"

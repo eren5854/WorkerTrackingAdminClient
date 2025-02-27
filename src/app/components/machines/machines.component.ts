@@ -7,11 +7,11 @@ import { SwalService } from '../../services/swal.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-machines',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './machines.component.html',
-  styleUrl: './machines.component.css'
+    selector: 'app-machines',
+    standalone:true,
+    imports: [CommonModule, FormsModule],
+    templateUrl: './machines.component.html',
+    styleUrl: './machines.component.css'
 })
 export class MachinesComponent {
   machineModel: MachineModel = new MachineModel();

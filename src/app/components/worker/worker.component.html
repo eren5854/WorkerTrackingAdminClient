@@ -77,14 +77,13 @@
                         class="form-control" id="dateOfBirth" autocomplete="off">
                 </div>
 
-                <div class="input-field mb-2">
+                <!-- <div class="input-field mb-2">
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
                         <label for="gender">Gender</label>
-                        <!-- <p *ngIf="!workerModel.gender" style="color: red; font-size: 14px;">*</p> -->
                     </div>
                     <input [(ngModel)]="workerModel.gender!" validate type="text" name="gender" class="form-control"
                         id="gender" autocomplete="off">
-                </div>
+                </div> -->
 
                 <div class="input-field mb-2">
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
@@ -120,6 +119,11 @@
                             <i class="fa-solid fa-floppy-disk"></i>
                             Update
                         </button>
+
+                        <button [disabled]="" class="submit" (click)="deleteWorkerById(workerModel.id!, workerModel.fullName!)" style="background: red;">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
+                        </button>
                     </div>
                 </div>
             </div>
@@ -132,7 +136,7 @@
         </span> -->
         <div class="right">
             <div class="input-box">
-                <h2>Add Product Targets</h2>
+                <h2>Add Production Targets</h2>
                 <form #createWorkerProductionForm="ngForm"
                     (ngSubmit)="createWorkerProduction(createWorkerProductionForm)">
                     <div class="input-field mb-2">
@@ -211,8 +215,8 @@
                             <th scope="col">Product</th>
                             <th scope="col">Daily Target</th>
                             <th scope="col">Weekly Target</th>
-                            <th scope="col">Monthly Target</th>
-                            <th scope="col">Yearly Target</th>
+                            <!-- <th scope="col">Monthly Target</th>
+                            <th scope="col">Yearly Target</th> -->
                             <th scope="col">Operations</th>
                         </tr>
                     </thead>
@@ -222,8 +226,8 @@
                             <td>{{workerProduction.productInfo.productName}}</td>
                             <td>{{workerProduction.dailyTarget}}</td>
                             <td>{{workerProduction.weeklyTarget}}</td>
-                            <td>{{workerProduction.monthlyTarget}}</td>
-                            <td>{{workerProduction.yearlyTarget}}</td>
+                            <!-- <td>{{workerProduction.monthlyTarget}}</td>
+                            <td>{{workerProduction.yearlyTarget}}</td> -->
                             <td>
                                 <a routerLink="/worker-production/{{workerProduction.id}}"><button
                                         class="btn btn-success mr-2"><i class="fa-solid fa-eye"></i></button></a>

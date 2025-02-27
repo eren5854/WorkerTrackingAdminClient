@@ -9,11 +9,11 @@ import { DepartmentProductionModel } from '../../models/department-production.mo
 import { ProductModel } from '../../models/product.model';
 
 @Component({
-  selector: 'app-department',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './department.component.html',
-  styleUrl: './department.component.css'
+    selector: 'app-department',
+    standalone: true,
+    imports: [CommonModule, FormsModule, RouterLink],
+    templateUrl: './department.component.html',
+    styleUrl: './department.component.css'
 })
 export class DepartmentComponent {
   id: string = "";

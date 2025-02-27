@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserModel } from '../../models/user.model';
 import { HttpService } from '../../services/http.service';
@@ -9,11 +10,11 @@ import { ChangePasswordModel } from '../../models/change-password.model';
 import { EmailParametersModel } from '../../models/email-parameters.model';
 
 @Component({
-  selector: 'app-settings',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.css'
+    selector: 'app-settings',
+    standalone:true,
+    imports: [CommonModule, FormsModule],
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.css'
 })
 export class SettingsComponent {
   userModel: UserModel = new UserModel();
@@ -31,6 +32,9 @@ export class SettingsComponent {
     private auth: AuthService,
     private swal: SwalService
   ){
+    this.userModel.firstName = auth.user.firstName;
+    this.userModel.lastName = auth.user.lastName;
+    this.userModel.userName = auth.user.userName;
     this.getEmailParameter();
   }
 
@@ -41,14 +45,19 @@ export class SettingsComponent {
   }
 
   updateUser(form: NgForm) {
+    this.userModel.id = this.auth.user.id;
     const formData: FormData = new FormData();
     if (form.valid) {
       formData.append("id", this.userModel.id!);
       formData.append("firstName", this.userModel.firstName!);
       formData.append("lastName", this.userModel.lastName!);
       formData.append("userName", this.userModel.userName!);
-      this.http.post("User/UpdateUser", formData, (res) => {
+      this.http.post("Workers/Update", formData, (res) => {
         this.getUserById(this.userModel.id);
+        localStorage.setItem("token", "");
+        setTimeout(() => {
+          location.reload();
+        },3000)
       })
     }
   }

@@ -6,11 +6,11 @@ import { HttpService } from '../../services/http.service';
 import { SwalService } from '../../services/swal.service';
 
 @Component({
-  selector: 'app-products',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+    selector: 'app-products',
+    standalone:true,
+    imports: [CommonModule, FormsModule],
+    templateUrl: './products.component.html',
+    styleUrl: './products.component.css'
 })
 export class ProductsComponent {
   products: ProductModel[] = [];

@@ -8,11 +8,11 @@ import { DepartmentModel } from '../../models/department.model';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-departments',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './departments.component.html',
-  styleUrl: './departments.component.css'
+    selector: 'app-departments',
+    standalone:true,
+    imports: [CommonModule, FormsModule, RouterLink],
+    templateUrl: './departments.component.html',
+    styleUrl: './departments.component.css'
 })
 export class DepartmentsComponent {
   departmentModel: DepartmentModel = new DepartmentModel();

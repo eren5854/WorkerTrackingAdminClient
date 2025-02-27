@@ -36,6 +36,8 @@ export class AuthService {
         
         this.user.id = decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"][0];
         this.user.fullName = decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"][1];
+        this.user.firstName = decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"][2];
+        this.user.lastName = decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"][3];
         this.user.email = decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
         this.user.userName = decode["UserName"];
         this.user.role = decode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];

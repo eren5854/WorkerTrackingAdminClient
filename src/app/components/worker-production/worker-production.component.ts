@@ -1,7 +1,6 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SwalService } from '../../services/swal.service';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { WorkerProductionModel } from '../../models/worker-production.model';
@@ -10,16 +9,22 @@ import { WorkerDailyProductionModel } from '../../models/worker-daily-production
 import { WorkerWeeklyProductionModel } from '../../models/worker-weekly-production.model';
 import { WorkerMonthlyProductionModel } from '../../models/worker-monthly-production.model';
 import { WorkerYearlyProductionModel } from '../../models/worker-yearly-production.model';
+import { FlexiGridModule } from 'flexi-grid';
 
 @Component({
   selector: 'app-worker-production',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FlexiGridModule],
   templateUrl: './worker-production.component.html',
   styleUrl: './worker-production.component.css'
 })
 export class WorkerProductionComponent {
   id: string = "";
+
+  // dateOfBirthFilterable = signal<boolean>(true);
+  // dateOfBirthFilterType = signal<FilterType>("date");
+  // themeClass = signal<string>("dark");
+
   workerProductionModel: WorkerProductionModel = new WorkerProductionModel();
   workerDailyProductions: WorkerDailyProductionModel[] = [];
   workerWeeklyProductions: WorkerWeeklyProductionModel[] = [];
@@ -34,10 +39,6 @@ export class WorkerProductionComponent {
   constructor(
     private http: HttpService,
     private activated: ActivatedRoute,
-    private swal: SwalService,
-    private router: Router,
-    private renderer: Renderer2,
-    private elRef: ElementRef,
   ) {
     this.activated.params.subscribe((res: any) => {
       this.id = res.id;
@@ -52,7 +53,9 @@ export class WorkerProductionComponent {
     this.http.get(`WorkerProductions/GetById?Id=${id}`, (res) => {
       if (res && res.data) {
         this.workerProductionModel = res.data;
-        
+        console.log(this.workerProductionModel);
+
+
         if (Array.isArray(this.workerProductionModel.dailyProductions)) {
           this.workerDailyProductions = [...this.workerProductionModel.dailyProductions];
         } else {
@@ -97,8 +100,18 @@ export class WorkerProductionComponent {
     if (form.valid) {
       this.http.post("WorkerProductions/Update", this.workerProductionModel, (res) => {
         console.log(res);
+        this.getWorkerProductionById(this.id);
+        this.getAllProducts();
       });
     }
+  }
+
+  updateWorkerDailyProduction(workerDailyProduction: WorkerDailyProductionModel) {
+
+  }
+
+  deleteWorkerDailyProductionById(id: string) {
+
   }
 
   onProductChange(event: any) {

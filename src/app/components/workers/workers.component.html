@@ -2,6 +2,31 @@
     <h1>Workers List</h1>
 </div>
 
+<!-- <div class="insights" style="display: flex;">
+    <div class="sales" style="background: transparent; box-shadow: none;">
+        <div class="right">
+            <div class="input-box">
+                <flexi-grid [filterable]="false" [filterable]="false"
+                    [commandColumnTemplate]="customButtonColumnTemplate" [commandColumnTextAlign]="'center'"
+                    [stickyCommandColumn]="true" [showCommandColumn]="true" themeClass="light" themeClass="light"
+                    [data]="workers">
+                    <flexi-grid-column field="firstName" title="First Name"></flexi-grid-column>
+                    <flexi-grid-column field="lastName" title="Last Name"></flexi-grid-column>
+                    <flexi-grid-column field="departmentInfo.departmentName" title="Department"></flexi-grid-column>
+
+                    <ng-template #customButtonColumnTemplate let-item="item">
+                        
+                        <flexi-button (click)="routeWorker(item.id)"  btnColor="primary">
+                            <i class="fa-solid fa-eye"></i>
+                        </flexi-button>
+                        
+                    </ng-template>
+                </flexi-grid>
+            </div>
+        </div>
+    </div>
+</div> -->
+
 <div class="insights" style="display: flex;">
     <table class="table table-striped" style="margin-top: 70px;">
         <thead>
@@ -13,8 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            @for(worker of workers; track workers){
-            <tr>
+            <tr *ngFor="let worker of workers">
                 <td>{{worker.firstName}}</td>
                 <td>{{worker.lastName}}</td>
                 <td>{{worker.departmentInfo.departmentName}}</td>
@@ -26,7 +50,6 @@
                             class="fa-solid fa-trash"></i></button> -->
                 </td>
             </tr>
-            }
         </tbody>
     </table>
 </div>
@@ -38,114 +61,105 @@
         </span>
         <h2 class="mt-2">Add Worker</h2>
         <div class="right">
-            
-                <div class="input-box">
 
-                    <div class="input-field mb-2">
-                        <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="firstName">First Name</label>
-                            <p *ngIf="!workerModel.firstName" style="color: red; font-size: 14px;">*</p>
-                        </div>
-                        <input [(ngModel)]="workerModel.firstName!" validate type="text" name="firstName"
-                            class="form-control" id="firstName" required autocomplete="off">
-                    </div>
+            <div class="input-box">
 
-                    <div class="input-field mb-2">
-                        <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="lastName">Last Name</label>
-                            <p *ngIf="!workerModel.lastName" style="color: red; font-size: 14px;">*</p>
-                        </div>
-                        <input [(ngModel)]="workerModel.lastName!" validate type="text" name="lastName"
-                            class="form-control" id="lastName" required autocomplete="off">
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="firstName">First Name</label>
+                        <p *ngIf="!workerModel.firstName" style="color: red; font-size: 14px;">*</p>
                     </div>
-
-                    <div class="input-field mb-2">
-                        <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="userName">Nick Name</label>
-                            <p *ngIf="!workerModel.userName" style="color: red; font-size: 14px;">*</p>
-                        </div>
-                        <input [(ngModel)]="workerModel.userName" validate type="text" name="userName"
-                            class="form-control" id="userName" required autocomplete="off">
-                    </div>
-
-                    <div class="input-field mb-2">
-                        <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="password">Password</label>
-                            <p *ngIf="!workerModel.password" style="color: red; font-size: 14px;">*</p>
-                        </div>
-                        <input [(ngModel)]="workerModel.password!" validate type="password" name="password"
-                            class="form-control" id="password" required autocomplete="off">
-                    </div>
-
-                    <div class="input-field mb-2">
-                        <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="dateOfBirth">Date Of Birth</label>
-                            <p *ngIf="!workerModel.dateOfBirth" style="color: red; font-size: 14px;">*</p>
-                        </div>
-                        <input [(ngModel)]="workerModel.dateOfBirth" validate type="date" name="dateOfBirth"
-                            class="form-control" id="dateOfBirth" autocomplete="off">
-                    </div>
+                    <input [(ngModel)]="workerModel.firstName!" validate type="text" name="firstName"
+                        class="form-control" id="firstName" required autocomplete="off">
                 </div>
 
-                <div class="input-box">
-
-                    <div class="input-field mb-2">
-                        <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="gender">Gender</label>
-                            <p *ngIf="!workerModel.gender" style="color: red; font-size: 14px;">*</p>
-                        </div>
-                        <input [(ngModel)]="workerModel.gender!" validate type="text" name="gender" class="form-control"
-                            id="gender" autocomplete="off">
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="lastName">Last Name</label>
+                        <p *ngIf="!workerModel.lastName" style="color: red; font-size: 14px;">*</p>
                     </div>
+                    <input [(ngModel)]="workerModel.lastName!" validate type="text" name="lastName" class="form-control"
+                        id="lastName" required autocomplete="off">
+                </div>
 
-                    <div class="input-field mb-2">
-                        <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="profilePicture">Profile Picture</label>
-                            <p *ngIf="!workerModel.profilePicture" style="color: red; font-size: 14px;">*</p>
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="userName">Nick Name</label>
+                        <p *ngIf="!workerModel.userName" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <input [(ngModel)]="workerModel.userName" validate type="text" name="userName" class="form-control"
+                        id="userName" required autocomplete="off">
+                </div>
+
+                <!-- <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="password">Password</label>
+                        <p *ngIf="!workerModel.password" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <input [(ngModel)]="workerModel.password!" validate type="password" name="password"
+                        class="form-control" id="password" required autocomplete="off">
+                </div> -->
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="dateOfBirth">Date Of Birth</label>
+                        <p *ngIf="!workerModel.dateOfBirth" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <input [(ngModel)]="workerModel.dateOfBirth" validate type="date" name="dateOfBirth"
+                        class="form-control" id="dateOfBirth" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="input-box">
+
+                <!-- <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="gender">Gender</label>
+                        <p *ngIf="!workerModel.gender" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <input [(ngModel)]="workerModel.gender!" validate type="text" name="gender" class="form-control"
+                        id="gender" autocomplete="off">
+                </div> -->
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="profilePicture">Profile Picture</label>
+                        <p *ngIf="!workerModel.profilePicture" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <img [src]="selectedImageUrl || 'assets/img/default-user-1.png'" class="mb-2" style="width: 100px;">
+                    <input type="file" #fileInput (change)="setImage($event)" name="mainImage"
+                        class="form-control d-none" id="mainImage" autocomplete="off">
+                    <div class="input-group">
+                        <input type="text" class="form-control mb-3" [value]="workerModel.profilePicture" readonly>
+                        <div class="input-group-append">
+                            <button class="btn" type="button" (click)="triggerFileInput()"><i
+                                    class="fa-solid fa-upload"></i></button>
                         </div>
-                        <img [src]="selectedImageUrl || 'assets/img/default-user-1.png'" class="mb-2"
-                            style="width: 100px;">
-                        <input type="file" #fileInput (change)="setImage($event)" name="mainImage"
-                            class="form-control d-none" id="mainImage" autocomplete="off">
-                        <div class="input-group">
-                            <input type="text" class="form-control mb-3" [value]="workerModel.profilePicture" readonly>
-                            <div class="input-group-append">
-                                <button class="btn" type="button" (click)="triggerFileInput()"><i
-                                        class="fa-solid fa-upload"></i></button>
-                            </div>
-                        </div>
-                        <!-- <input [(ngModel)]="workerModel.profilePicture!" validate type="text" name="profilePicture"
+                    </div>
+                    <!-- <input [(ngModel)]="workerModel.profilePicture!" validate type="text" name="profilePicture"
                             class="form-control" id="profilePicture" required autocomplete="off"> -->
-                    </div>
+                </div>
 
-                    <div class="input-field mb-2">
-                        <div style="display: flex; gap: 0.5rem; height: 21px;">
-                            <label for="departmentId">Department</label>
-                            <p *ngIf="!workerModel.departmentId" style="color: red; font-size: 14px;">*</p>
-                        </div>
-                        <!-- <input [(ngModel)]="workerModel.departmentId" validate type="text" name="departmentId"
-                            class="form-control" id="departmentId" required autocomplete="off"> -->
-                        <div class="select">
-                            <span class="selected">{{ selectedOption }}</span> <!-- Seçilen öğeyi göster -->
-                            <div class="caret"></div>
-                        </div>
-                        <ul class="menu">
-                            <li>Kategori seçiniz...</li>
-                            <li *ngFor="let department of departments" [attr.data-id]="department.id"
-                                (click)="selectDepartment(department)">
-                                {{ department.departmentName }}
-                            </li>
-                        </ul>
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="departmentId">Department</label>
+                        <p *ngIf="!workerModel.departmentId" style="color: red; font-size: 14px;">*</p>
                     </div>
+                    <select class="form-control" (change)="onProductChange($event)">
+                        <option value="">Select product...</option>
+                        <option *ngFor="let department of departments" [value]="department.id">{{ department.departmentName }}
+                        </option>
+                    </select>
                 </div>
-                <div class="input-field">
-                    <div class="btns">
-                        <button (click)="createUser()" [disabled]="" class="submit">
-                            <i class="fa-solid fa-floppy-disk"></i>
-                            Save
-                        </button>
-                    </div>
+            </div>
+            <div class="input-field">
+                <div class="btns">
+                    <button (click)="createUser()" [disabled]="" class="submit">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save
+                    </button>
                 </div>
+            </div>
         </div>
     </div>
 </div>

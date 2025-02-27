@@ -119,9 +119,7 @@
 
 
 <div class="insights item1">
-
-
-    <div class="sales">
+    <!-- <div class="sales">
         <div class="right">
             <div class="input-box">
                 <h2>Daily Productions Records</h2>
@@ -146,11 +144,7 @@
                             <td>{{workerDailyProduction.dateEnd | date: "dd/MM/yyyy - HH:mm"}}</td>
                             <td>
                                 {{workerDailyProduction.isActive}}
-                                <!-- <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
-                                            class="fa-solid fa-eye"></i></button></a>
-                                <button class="btn btn-danger"
-                                    (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
-                                        class="fa-solid fa-trash"></i></button> -->
+                                
                             </td>
                         </tr>
                         }
@@ -158,121 +152,81 @@
                 </table>
             </div>
         </div>
+    </div> -->
+
+    <div class="sales" style="background: transparent; box-shadow: none;">
+        <div class="right">
+            <div class="input-box">
+                <h2>Daily Productions Records</h2>
+                <flexi-grid 
+                    [filterable]="false" 
+                    [commandColumnTemplate]="customButtonColumnTemplate"  
+                    [commandColumnTextAlign]="'center'" 
+                    [stickyCommandColumn]="true" 
+                    [showCommandColumn]="true"
+                    themeClass="light"
+                    [data]="workerDailyProductions">
+                    <flexi-grid-column field="dailyActual" title="Daily Actual"></flexi-grid-column>
+                    <flexi-grid-column field="dailyTarget" title="Daily Target"></flexi-grid-column>
+                    <flexi-grid-column field="dailyYield" title="Daily Yield(%)"></flexi-grid-column>
+                    <flexi-grid-column field="dateStart" filterType="date" format="dd.MM.yyyy - HH:mm" title="Start Date"></flexi-grid-column>
+                    <flexi-grid-column field="dateEnd" filterType="date" format="dd.MM.yyyy - HH:mm" title="End Date"></flexi-grid-column>
+
+                    <ng-template #customButtonColumnTemplate let-item="item">
+                        
+                        <flexi-button (click)="updateWorkerDailyProduction(item)" btnColor="primary">
+                          <i class="fa-solid fa-edit"></i>
+                        </flexi-button>
+                        <flexi-button (click)="deleteWorkerDailyProductionById(item.id)" class="ms-1" btnColor="danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </flexi-button>
+                    </ng-template>
+                </flexi-grid>
+            </div>
+        </div>
     </div>
 
-    <div class="sales">
+    <div class="sales" style="background: transparent; box-shadow: none;">
         <div class="right">
             <div class="input-box">
                 <h2>Weekly Productions Records</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Weekly Target</th>
-                            <th scope="col">Weekly Actual</th>
-                            <th scope="col">Weekly Yield</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for(workerWeeklyProduction of workerWeeklyProductions; track workerWeeklyProduction){
-                        <tr>
-                            <td>{{workerWeeklyProduction.weeklyTarget}}</td>
-                            <td>{{workerWeeklyProduction.weeklyActual}}</td>
-                            <td>{{workerWeeklyProduction.weeklyYield}}</td>
-                            <td>{{workerWeeklyProduction.dateStart | date: "dd/MM/yyyy - HH:mm"}}</td>
-                            <td>{{workerWeeklyProduction.dateEnd | date: "dd/MM/yyyy - HH:mm"}}</td>
-                            <td>
-                                {{workerWeeklyProduction.isActive}}
-                                <!-- <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
-                                            class="fa-solid fa-eye"></i></button></a>
-                                <button class="btn btn-danger"
-                                    (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
-                                        class="fa-solid fa-trash"></i></button> -->
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
+                <flexi-grid [filterable]="false" [data]="workerWeeklyProductions">
+                    <flexi-grid-column field="weeklyActual" title="Weekly Actual"></flexi-grid-column>
+                    <flexi-grid-column field="weeklyTarget" title="Weekly Target"></flexi-grid-column>
+                    <flexi-grid-column field="weeklyYield" title="Weekly Yield(%)"></flexi-grid-column>
+                    <flexi-grid-column field="dateStart" filterType="date" format="dd.MM.yyyy - HH:mm" title="Start Date"></flexi-grid-column>
+                    <flexi-grid-column field="dateEnd" filterType="date" format="dd.MM.yyyy - HH:mm" title="End Date"></flexi-grid-column>
+                </flexi-grid>
             </div>
         </div>
     </div>
 
-    <div class="sales">
+    <div class="sales" style="background: transparent; box-shadow: none;">
         <div class="right">
             <div class="input-box">
                 <h2>Monthly Productions Records</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Monthly Target</th>
-                            <th scope="col">Monthly Actual</th>
-                            <th scope="col">Monthly Yield</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for(workerMonthlyProduction of workerMonthlyProductions; track workerMonthlyProduction){
-                        <tr>
-                            <td>{{workerMonthlyProduction.monthlyTarget}}</td>
-                            <td>{{workerMonthlyProduction.monthlyActual}}</td>
-                            <td>{{workerMonthlyProduction.monthlyYield}}</td>
-                            <td>{{workerMonthlyProduction.dateStart | date: "dd/MM/yyyy - HH:mm"}}</td>
-                            <td>{{workerMonthlyProduction.dateEnd | date: "dd/MM/yyyy - HH:mm"}}</td>
-                            <td>
-                                {{workerMonthlyProduction.isActive}}
-                                <!-- <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
-                                            class="fa-solid fa-eye"></i></button></a>
-                                <button class="btn btn-danger"
-                                    (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
-                                        class="fa-solid fa-trash"></i></button> -->
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
+                <flexi-grid [filterable]="false" [data]="workerMonthlyProductions">
+                    <flexi-grid-column field="monthlyActual" title="Monthly Actual"></flexi-grid-column>
+                    <flexi-grid-column field="monthlyTarget" title="Monthly Target"></flexi-grid-column>
+                    <flexi-grid-column field="monthlyYield" title="Monthly Yield(%)"></flexi-grid-column>
+                    <flexi-grid-column field="dateStart" filterType="date" format="dd.MM.yyyy - HH:mm" title="Start Date"></flexi-grid-column>
+                    <flexi-grid-column field="dateEnd" filterType="date" format="dd.MM.yyyy - HH:mm" title="End Date"></flexi-grid-column>
+                </flexi-grid>
             </div>
         </div>
     </div>
 
-    <div class="sales">
+    <div class="sales" style="background: transparent; box-shadow: none;">
         <div class="right">
             <div class="input-box">
                 <h2>Yearly Productions Records</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Yearly Target</th>
-                            <th scope="col">Yearly Actual</th>
-                            <th scope="col">Yearly Yield</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for(workerYearlyProduction of workerYearlyProductions; track workerYearlyProduction){
-                        <tr>
-                            <td>{{workerYearlyProduction.yearlyTarget}}</td>
-                            <td>{{workerYearlyProduction.yearlyActual}}</td>
-                            <td>{{workerYearlyProduction.yearlyYield}}</td>
-                            <td>{{workerYearlyProduction.dateStart | date: "dd/MM/yyyy - HH:mm"}}</td>
-                            <td>{{workerYearlyProduction.dateEnd | date: "dd/MM/yyyy - HH:mm"}}</td>
-                            <td>
-                                {{workerYearlyProduction.isActive}}
-                                <!-- <a routerLink="/worker-production/{{workerProduction.id}}"><button class="btn btn-success mr-2"><i
-                                            class="fa-solid fa-eye"></i></button></a>
-                                <button class="btn btn-danger"
-                                    (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
-                                        class="fa-solid fa-trash"></i></button> -->
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
+                <flexi-grid [filterable]="false" [data]="workerYearlyProductions">
+                    <flexi-grid-column field="yearlyActual" title="Yearly Actual"></flexi-grid-column>
+                    <flexi-grid-column field="yearlyTarget" title="Yearly Target"></flexi-grid-column>
+                    <flexi-grid-column field="yearlyYield" title="Yearly Yield(%)"></flexi-grid-column>
+                    <flexi-grid-column field="dateStart" filterType="date" format="dd.MM.yyyy - HH:mm" title="Start Date"></flexi-grid-column>
+                    <flexi-grid-column field="dateEnd" filterType="date" format="dd.MM.yyyy - HH:mm" title="End Date"></flexi-grid-column>
+                </flexi-grid>
             </div>
         </div>
     </div>

@@ -10,11 +10,11 @@ import { WorkerProductionModel } from '../../models/worker-production.model';
 import { ProductModel } from '../../models/product.model';
 
 @Component({
-  selector: 'app-worker',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './worker.component.html',
-  styleUrl: './worker.component.css'
+    selector: 'app-worker',
+    standalone:true,
+    imports: [CommonModule, FormsModule, RouterLink],
+    templateUrl: './worker.component.html',
+    styleUrl: './worker.component.css'
 })
 export class WorkerComponent {
   workerModel: UserModel = new UserModel();
@@ -114,6 +114,14 @@ export class WorkerComponent {
         this.getAllProducts();
       });
     }
+  }
+
+  deleteWorkerById(id:string, name:string){
+    this.swal.callToastWithButton(`Are you sure you want to delete employee named ${name}?`, 'Yes!', () => {
+      this.http.get(`Workers/DeleteById?Id=${id}`, (res) => {
+        this.router.navigateByUrl("/workers");
+      });
+    });
   }
 
   triggerFileInput() {

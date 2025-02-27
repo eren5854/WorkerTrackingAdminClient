@@ -5,11 +5,11 @@ import { AuthService } from '../../services/auth.service';
 import { UserModel } from '../../models/user.model';
 
 @Component({
-  selector: 'app-layout',
-  standalone: true,
-  imports: [RouterOutlet, RouterLink],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+    selector: 'app-layout',
+    standalone:true,
+    imports: [RouterOutlet, RouterLink],
+    templateUrl: './layout.component.html',
+    styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
   @ViewChild('sideMenu') sideMenu: ElementRef | undefined;
