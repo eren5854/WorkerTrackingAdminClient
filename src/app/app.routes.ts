@@ -13,11 +13,17 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { DepartmentComponent } from './components/department/department.component';
 import { WorkerProductionComponent } from './components/worker-production/worker-production.component';
 import { WorkerAssignmentsComponent } from './components/worker-assignments/worker-assignments.component';
+import { WorkerAssignmentComponent } from './components/worker-assignment/worker-assignment.component';
+import { WorkerLoginComponent } from './components/worker-login/worker-login.component';
 
 export const routes: Routes = [
     {
         path: "login",
         component : LoginComponent
+    },
+    {
+        path: "worker-login",
+        component: WorkerLoginComponent
     },
     {
         path : "",
@@ -59,6 +65,10 @@ export const routes: Routes = [
             {
                 path: "worker-assignments",
                 component: WorkerAssignmentsComponent
+            },
+            {
+                path: "worker-assignment/:id",
+                component: WorkerAssignmentComponent
             },
             {
                 path: "settings",

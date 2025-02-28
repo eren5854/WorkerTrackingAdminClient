@@ -120,7 +120,8 @@
                             Update
                         </button>
 
-                        <button [disabled]="" class="submit" (click)="deleteWorkerById(workerModel.id!, workerModel.fullName!)" style="background: red;">
+                        <button [disabled]="" class="submit"
+                            (click)="deleteWorkerById(workerModel.id!, workerModel.fullName!)" style="background: red;">
                             <i class="fa-solid fa-trash"></i>
                             Delete
                         </button>
@@ -203,7 +204,7 @@
     </div>
 </div>
 
-<div class="insights item1 mb-3">
+<div class="insights item1">
 
     <div class="sales">
         <div class="right">
@@ -234,6 +235,51 @@
                                 <!-- <button class="btn btn-danger"
                                     (click)="deleteDepartmentProductionById(workerProduction.id!)"><i
                                         class="fa-solid fa-trash"></i></button> -->
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="insights item1 mb-3">
+
+    <div class="sales">
+        <div class="right">
+            <div class="input-box">
+                <h2>{{workerModel.fullName}} Assignments</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Machine</th>
+                            <th scope="col">Start Time</th>
+                            <!-- <th scope="col">Monthly Target</th>
+                            <th scope="col">Yearly Target</th> -->
+                            <th scope="col">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(workerAssignment of workerAssignments; track workerAssignment){
+                        <tr>
+                            <td>{{workerAssignment.workerProductionInfo.productInfo.productName}}</td>
+                            <td>{{workerAssignment.machineInfo.machineName}}</td>
+                            <td>{{workerAssignment.startTime | date: "HH:mm"}}</td>
+                            <!-- <td>{{workerAssignment.monthlyTarget}}</td>
+                            <td>{{workerAssignment.yearlyTarget}}</td> -->
+                            <td>
+                                <a routerLink="/worker-assignment/{{workerAssignment.id}}"><button
+                                        class="btn btn-success mr-2"><i class="fa-solid fa-eye"></i></button></a>
+                                <button type="button" (click)="updateWorkerAssignmetIsActive(workerAssignment.id!)"
+                                    class="btn btn-primary">
+                                    <i *ngIf="workerAssignment.isActive" style="font-size: 18px;"
+                                        class="fa-solid fa-square-check"></i>
+                                    <i *ngIf="!workerAssignment.isActive" style="font-size: 18px;"
+                                        class="fa-solid fa-square"></i>
+                                </button>
                             </td>
                         </tr>
                         }

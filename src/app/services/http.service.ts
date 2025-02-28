@@ -32,7 +32,8 @@ export class HttpService {
       },
       error: (err: HttpErrorResponse) => {
         if (!err.error.isSuccess) {
-          console.log(err.error.errorMessages);
+          console.log(err.error.errorMessages[0]);
+          this.swal.callToast(err.error.errorMessages[0], 'error');
         }
         else{
           console.log(err);

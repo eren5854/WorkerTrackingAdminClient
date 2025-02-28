@@ -1,1 +1,84 @@
-<p>worker-assignment works!</p>
+<div style="display: flex;">
+    <h1>{{workerAssignmentModel.userInfo.fullName}} Assignment</h1>
+</div>
+
+<div class="insights">
+    <div class="sales">
+        <span class="material-symbols-outlined icons">
+            assignment_ind
+        </span>
+        <h2 class="mt-2">Update Assignment</h2>
+        <div class="right">
+
+            <div class="input-box">
+
+                <!-- <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="departmentId">Worker</label>
+                        <p *ngIf="!workerAssignmentModel.appUserId" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <select class="form-control" (change)="onWorkerChange($event)">
+                        <option value="">Select worker...</option>
+                        <option *ngFor="let worker of workers" [value]="worker.id">{{ worker.fullName }}
+                        </option>
+                    </select>
+                </div> -->
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="departmentId">Machine</label>
+                        <p *ngIf="!workerAssignmentModel.machineId" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <select class="form-control" (change)="onMachineChange($event)">
+                        <option [value]="currentMachineId">{{selectedMachineName}}</option>
+                        <option *ngFor="let machine of machines" [value]="machine.id">{{ machine.machineName }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="departmentId">Production</label>
+                        <p *ngIf="!workerAssignmentModel.workerProductionId" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <select class="form-control" (change)="onWorkerProductionChange($event)">
+                        <option [value]="currentWorkerProductionId">{{selectedWorkerProductionName}}</option>
+                        <option *ngFor="let workerProduction of workerProductions" [value]="workerProduction.id">{{ workerProduction.productInfo.productName }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="startTime">Start Time</label>
+                        <p *ngIf="!workerAssignmentModel.startTime" style="color: red; font-size: 14px;">*</p>
+                    </div>
+                    <input [(ngModel)]="workerAssignmentModel.startTime!" validate type="datetime-local" name="startTime"
+                        class="form-control" id="startTime" required autocomplete="off">
+                </div>
+
+                <!-- <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="endTime">End Time</label>
+                    </div>
+                    <input [(ngModel)]="workerAssignmentModel.endTime!" validate type="date" name="endTime" class="form-control"
+                        id="endTime" required autocomplete="off">
+                </div> -->
+
+                <div class="input-field">
+                    <div class="btns">
+                        <button (click)="updateWorkerAssignment()" [disabled]="" class="submit">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Save
+                        </button>
+                        <button [disabled]="" class="submit"
+                            (click)="deleteWorkerAssignmentById()" style="background: red;">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
+                        </button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div *ngIf="!quantityCardVisible" class="insights">
+    <div class="sales">
+        <h1 class="mt-2" style="text-align: center; font-size: 56px !important;">Worker Login</h1>
+        <div class="right">
+            <div class="input-box">
+                <div class="input-field mb-2">
+                    <label for="code">Enter Code:</label>
+                    <input type="text" name="code" class="form-control" id="code" [(ngModel)]="code" required
+                        autocomplete="off" readonly>
+                </div>
+
+                <div class="input-field mb-2">
+                    <div id="container">
+                        <ul id="keyboard">
+                            <li class="letter" (click)="addToInput('1')">1</li>
+                            <li class="letter" (click)="addToInput('2')">2</li>
+                            <li class="letter" (click)="addToInput('3')">3</li>
+                            <li class="letter clearl" (click)="addToInput('4')">4</li>
+                            <li class="letter" (click)="addToInput('5')">5</li>
+                            <li class="letter" (click)="addToInput('6')">6</li>
+                            <li class="letter clearl" (click)="addToInput('7')">7</li>
+                            <li class="letter" (click)="addToInput('8')">8</li>
+                            <li class="letter" (click)="addToInput('9')">9</li>
+
+                            <li class="delete" (click)="deleteLastChar()">⌫</li>
+                            <li class="letter" (click)="addToInput('0')">0</li>
+                            <li class="empty">
+                                <button (click)="workerLogin()" [disabled]="" style="background: transparent;">
+                                    <i class="fa-solid fa-right-to-bracket" style="font-size: 36px;"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="quantityCardVisible" class="insights">
+    <div class="sales">
+        <!-- <h1 class="mt-2" style="text-align: center; font-size: 46px !important;">Worker Missions</h1> -->
+        <div >
+            <div class="input-box">
+
+                <div class="card">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <img src="{{imageUrl}}ProfilePictures/{{workerAssignmentModel.userInfo.profilePicture}}" alt="John" style="width:50%">
+                    </div>
+                    <h1 class="mt-2">{{workerAssignmentModel.userInfo.fullName}}</h1>
+                    <p class="title">Machine: {{workerAssignmentModel.machineInfo.machineName}}</p>
+                    <p class="title">Product: {{workerAssignmentModel.workerProductionInfo.productInfo.productName}}</p>
+                    <p class="title">Target Quantity: {{workerAssignmentModel.workerProductionInfo.targetQuantity}}</p>
+                    <p class="title">Start Time: {{workerAssignmentModel.startTime | date:"HH:mm"}}</p>
+
+                    <div class="input-field mb-2">
+                        <label for="quantity">Actual Quantity</label>
+                        <input type="number" name="quantity" class="form-control" id="quantity" [(ngModel)]="quantity" required
+                            autocomplete="off">
+                    </div>
+
+                    <div class="input-field">
+                        <div class="btns">
+                            <button  [disabled]="" class="submit" style="margin-top: 0; margin-right: 0;">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

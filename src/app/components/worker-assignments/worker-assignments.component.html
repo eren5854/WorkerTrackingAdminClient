@@ -44,10 +44,6 @@
                 <td>{{workerAssignment.machineInfo.machineName}}</td>
                 <td>
                     <button routerLink="/worker-assignment/{{workerAssignment.id}}" class="btn btn-success mr-2"><a ><i class="fa-solid fa-eye"></i></a></button>
-                    <button  type="button" (click)="updateWorkerAssignmetIsActive(workerAssignment.id!)" class="btn btn-primary">
-                        <i *ngIf="workerAssignment.isActive" style="font-size: 18px;" class="fa-solid fa-square-check"></i>
-                        <i *ngIf="!workerAssignment.isActive" style="font-size: 18px;" class="fa-solid fa-square"></i>
-                    </button>
                     <!-- <button class="btn btn-success mr-2" (click)="openModal(user)"><i
                             class="fa-solid fa-eye"></i></button> -->
                     <!-- <button class="btn btn-danger" (click)="deleteUserById(worker.id!, worker.userName)"><i
@@ -109,7 +105,7 @@
                         <label for="startTime">Start Time</label>
                         <p *ngIf="!workerAssignmentModel.startTime" style="color: red; font-size: 14px;">*</p>
                     </div>
-                    <input [(ngModel)]="workerAssignmentModel.startTime!" validate type="date" name="startTime"
+                    <input [(ngModel)]="workerAssignmentModel.startTime!" validate type="datetime-local" name="startTime"
                         class="form-control" id="startTime" required autocomplete="off">
                 </div>
 

@@ -87,7 +87,7 @@ export class WorkerComponent {
   }
 
   getAllWorkerAssignmentsByAppUserId(id: string) {
-    this.http.get(`WorkerAssignments/GetAllByAppUserId?Id=${id}`, (res) => {
+    this.http.get(`WorkerAssignments/GetAllByAppUserId?AppUserId=${id}`, (res) => {
       this.workerAssignments = res.data;
       console.log(this.workerAssignments);
     });
@@ -131,6 +131,17 @@ export class WorkerComponent {
       this.http.get(`Workers/DeleteById?Id=${id}`, (res) => {
         this.router.navigateByUrl("/workers");
       });
+    });
+  }
+
+  updateWorkerAssignmetIsActive(id: string) {
+    this.http.get(`WorkerAssignments/UpdateStatus?Id=${id}`, (res) => {
+      console.log(res);
+      this.getWorkerById(this.id!);
+      this.getAllDepartments();
+      this.getAllWorkerProductionsByUserId(this.id);
+      this.getAllProducts();
+      this.getAllWorkerAssignmentsByAppUserId(this.id);
     });
   }
 

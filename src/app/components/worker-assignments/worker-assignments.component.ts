@@ -37,7 +37,7 @@ export class WorkerAssignmentsComponent {
 
   getAllWorkerAssignments() {
     this.http.get("WorkerAssignments/GetAll", (res) => {
-      this.workerAssignments = res.data;
+      this.workerAssignments = res.data.filter((assignment: WorkerAssignmentModel) => assignment.isActive);
       console.log(this.workerAssignments);
     });
   }
@@ -66,11 +66,10 @@ export class WorkerAssignmentsComponent {
   }
 
   createWorkerAssignment() {
-
-  }
-
-  updateWorkerAssignmetIsActive(id: string) {
-    this.http.get(`WorkerAssignments/UpdateStatus?Id=${id}`, (res) => {
+    this.workerAssignmentModel.appUserId = this.selectedWorkerId!;
+    this.workerAssignmentModel.machineId = this.selectedMachinetId!;
+    this.workerAssignmentModel.workerProductionId = this.selectedWorkerProductionId!;
+    this.http.post("WorkerAssignments/Create", this.workerAssignmentModel, (res) => {
       console.log(res);
       this.getAllWorkerAssignments();
       this.getAllWorkers();
