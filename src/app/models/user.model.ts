@@ -4,6 +4,7 @@ export class UserModel{
     firstName?: string;
     lastName?:string;
     userName: string = "";
+    workerCode?:number;
     email?: string;
     departmentInfo:any;
     departmentId?:string;

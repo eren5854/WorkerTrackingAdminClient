@@ -1,1 +1,164 @@
-<p>home works!</p>
+<div style="display: flex;">
+    <h1>Dashboard</h1>
+</div>
+
+<div class="insights">
+    <div class="sales card-none">
+        <!-- <span class="material-symbols-outlined icons">
+            person
+        </span> -->
+        <div class="right">
+            <h2>General Information</h2>
+                <div class="sales-analytics">
+                    <!-- <h2>Veri Analizi</h2> -->
+                    <div class="item online">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">
+                                engineering
+                            </span>
+                        </div>
+                        <div class="right">
+                            <div class="info">
+                                <h3>Workers</h3>
+                            </div>
+                            <!-- <h5 class="success">+39%</h5> -->
+                            <h3>{{workers.length}}</h3>
+                        </div>
+                    </div>
+
+                    <div class="item online">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">
+                                precision_manufacturing
+                            </span>
+                        </div>
+                        <div class="right">
+                            <div class="info">
+                                <h3>Machines</h3>
+                            </div>
+                            <!-- <h5 class="success">+39%</h5> -->
+                            <h3>{{machines.length}}</h3>
+                        </div>
+                    </div>
+
+                    <div class="item online">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">
+                                apartment
+                            </span>
+                        </div>
+                        <div class="right">
+                            <div class="info">
+                                <h3>Departments</h3>
+                            </div>
+                            <!-- <h5 class="success">+39%</h5> -->
+                            <h3>{{departments.length}}</h3>
+                        </div>
+                    </div>
+
+                    <div class="item online">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">
+                                inventory_2
+                            </span>
+                        </div>
+                        <div class="right">
+                            <div class="info">
+                                <h3>Products</h3>
+                            </div>
+                            <!-- <h5 class="success">+39%</h5> -->
+                            <h3>{{products.length}}</h3>
+                        </div>
+                    </div>
+                </div>
+            <div class="input-box">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="sales">
+        <!-- <span class="material-symbols-outlined icons">
+            person
+        </span> -->
+        <div class="right">
+            <div class="input-box">
+                <div class="input-field mb-2">
+                    <div style="display: flex; gap: 0.5rem; height: 21px;">
+                        <label for="userName">Total Product</label>
+                    </div>
+                    <input [(ngModel)]="totalProducts" validate type="text" name="userName" class="form-control"
+                        id="userName" required autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="sales">
+        <div class="right">
+            <div class="input-box">
+                <h2>Update Worker Code</h2>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+<div class="insights item1 mb-3">
+
+    <div class="sales">
+        <div class="right">
+            <div class="input-box">
+                <h2>Top Workers</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Total Product</th>
+                            <!-- <th scope="col">Operations</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(workerProduction of workerProductions; track workerProduction){
+                        <tr>
+                            <td>{{workerProduction.fullName}}</td>
+                            <td>{{workerProduction.total}}</td>
+                            <!-- <td>{{workerProduction.startTime | date: "HH:mm"}}</td> -->
+                            <!-- <td>
+                                <a routerLink="/worker/{{workerProduction.appUserId}}"><button
+                                        class="btn btn-success mr-2"><i class="fa-solid fa-eye"></i></button></a>
+                            </td> -->
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="insights item1 mb-3">
+
+    <div class="sales">
+        <div class="right">
+            <div class="input-box">
+                <h2>Top Products</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Total Product</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(productCount of productCounts; track productCount){
+                        <tr>
+                            <td>{{productCount.name}}</td>
+                            <td>{{productCount.count}}</td>                            
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

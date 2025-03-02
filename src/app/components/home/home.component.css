@@ -1,0 +1,16 @@
+.card-none{
+    background: transparent;
+    box-shadow: none;
+}
+
+.right{
+    margin-top: 0;
+}
+.number-font{
+    font-size: 28px;
+}
+
+.item1{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+}

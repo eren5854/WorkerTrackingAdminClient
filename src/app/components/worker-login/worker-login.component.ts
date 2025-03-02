@@ -20,6 +20,7 @@ export class WorkerLoginComponent {
 
   constructor(
     private http:HttpService,
+    private swal: SwalService
   ){
     this.imageUrl = http.imageUrl;
   }
@@ -32,11 +33,22 @@ export class WorkerLoginComponent {
     });
   }
 
+  workerActualQuantity(){
+    this.http.get(`WorkerLogins/WorkerActualQuantity?AppUserId=${this.workerAssignmentModel.userInfo.appUserId}&ActualQuantity=${this.quantity}`, (res) => {
+      console.log(res);
+      this.swal.callToast(res.data, "success");
+    });
+  }
+
   addToInput(value: string) {
     this.code += value;
   }
 
   deleteLastChar() {
     this.code = this.code.slice(0, -1);
+  }
+
+  exit(){
+    location.reload();
   }
 }

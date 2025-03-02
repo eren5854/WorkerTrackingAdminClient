@@ -26,4 +26,6 @@ export class WorkerProductionModel{
     weeklyProductions?:WorkerWeeklyProductionModel;
     monthlyProductions?:WorkerMonthlyProductionModel;
     yearlyProductions?:WorkerYearlyProductionModel;
+    total?:number;
+    fullName?:string;
 }

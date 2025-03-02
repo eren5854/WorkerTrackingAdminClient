@@ -78,7 +78,9 @@
             <div class="input-box" style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1.5rem;">
                 <!-- <h2>Production Info</h2> -->
                 <div class="input-field mb-2 input-field-w">
-                    <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{workerProductionModel.dailyYield?.toFixed()}}"></div>
+                    <!-- <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{workerProductionModel.dailyYield?.toFixed()}}"></div> -->
+                    <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{((workerProductionModel.dailyActual! / workerProductionModel.dailyTarget) * 100).toFixed()}}"></div>
+
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
                         <label for="dailyTarget">Daily Actual: {{workerProductionModel.dailyActual!}}</label>
                     </div>
@@ -89,7 +91,7 @@
                 </div>
 
                 <div class="input-field mb-2 input-field-w">
-                    <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{workerProductionModel.weeklyYield?.toFixed()}}"></div>
+                    <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{((workerProductionModel.weeklyActual! / workerProductionModel.weeklyTarget!) * 100).toFixed()}}"></div>
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
                         <label for="weeklyTarget">Weekly Actual: {{workerProductionModel.weeklyActual}}</label>
                     </div>
@@ -99,7 +101,7 @@
                 </div>
 
                 <div class="input-field mb-2 input-field-w">
-                    <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{workerProductionModel.monthlyYield?.toFixed()}}"></div>
+                    <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{((workerProductionModel.monthlyActual! / workerProductionModel.monthlyTarget!) * 100).toFixed()}}"></div>
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
                         <label for="monthlyTarget">Monthly Actual: {{workerProductionModel.monthlyActual}}</label>
                     </div>
@@ -109,7 +111,7 @@
                 </div>
 
                 <div class="input-field mb-2 input-field-w">
-                    <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{workerProductionModel.yearlyYield?.toFixed()}}"></div>
+                    <div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: {{((workerProductionModel.yearlyActual! / workerProductionModel.yearlyTarget!) * 100).toFixed()}}"></div>
                     <div style="display: flex; gap: 0.5rem; height: 21px;">
                         <label for="yearlyTarget">Yearly Actual: {{workerProductionModel.yearlyActual}}</label>
                     </div>

@@ -112,6 +112,17 @@ export class WorkerComponent {
     });
   }
 
+  updateWorkerCode(){
+    this.http.get(`Workers/UpdateCode?Id=${this.id}`, (res) => {
+      console.log(res.data);
+      this.swal.callToast(res.data, "success");
+      this.getWorkerById(this.id!);
+      this.getAllDepartments();
+      this.getAllWorkerProductionsByUserId(this.id);
+      this.getAllProducts();
+    });
+  }
+
   createWorkerProduction(form: NgForm) {
     this.workerProductionModel.appUserId = this.id;
     this.workerProductionModel.productId = this.selectedProductId!;
