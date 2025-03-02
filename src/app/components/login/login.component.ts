@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
     styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  url:string = "https://192.168.68.134:45455/api/"
-  // url:string = "https://alternatifmuhendis.webapi.erendelibas.com/api/"
+  // url:string = "https://192.168.68.134:45455/api/"
+  url:string = "https://wtapi.erendelibas.xyz/api/"
   loginModel: LoginModel = new LoginModel();
   showModal = false;
   emailModel: ForgotPasswordModel = new ForgotPasswordModel();
